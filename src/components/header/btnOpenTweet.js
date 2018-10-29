@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Modal, Typography, IconButton } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
+import setFormTweet from "./formTweet";
 
 export class BtnOpenTweet extends Component {
   state = {
@@ -16,7 +17,7 @@ export class BtnOpenTweet extends Component {
   };
 
   render() {
-    const { form } = this.props;
+    const { excuteTweet } = this.props;
     return (
       <div>
         <Button onClick={this.handleOpen}>tweet</Button>
@@ -45,7 +46,7 @@ export class BtnOpenTweet extends Component {
               </Typography>
             </div>
             <br />
-            {form}
+            {setFormTweet(excuteTweet)}
           </div>
         </Modal>
       </div>
@@ -53,6 +54,6 @@ export class BtnOpenTweet extends Component {
   }
 }
 
-export default function setBtnOpenTweet(form) {
-  return <BtnOpenTweet form={form} />;
+export default function setBtnOpenTweet(excuteTweet) {
+  return <BtnOpenTweet excuteTweet={excuteTweet} />;
 }

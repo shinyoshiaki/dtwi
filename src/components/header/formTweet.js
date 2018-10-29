@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { IconButton, TextField, Button } from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
-import { withRouter } from "react-router";
+import { TextField, Button } from "@material-ui/core";
 import setBtnPicFile from "./btnPicFile";
 
 export class FormTweet extends Component {
-  toAccout = () => {
-    const { history } = this.props;
-    console.log("this.props", this.props);
-    if (history) history.push("/accout");
+  text;
+  file;
+
+  handlePicFile = file => {
+    this.file = file;
   };
+
   render() {
-    const { btnPicFile } = this.props;
+    const { excuteTweet } = this.props;
     return (
       <div style={{ margin: 10 }}>
         <TextField
@@ -22,15 +21,23 @@ export class FormTweet extends Component {
           variant="outlined"
           rows="6"
           style={{ width: "100%" }}
+          onChange={e => (this.text = e.target.value)}
         />
         <br />
         <div style={{ bottom: 0 }}>
-          <div style={{ float: "left" }}>{setBtnPicFile(btnPicFile)}</div>
-          <Button style={{ float: "right" }}>tweet</Button>
+          <div style={{ float: "left" }}>{setBtnPicFile(this.btnPicFile)}</div>
+          <Button
+            style={{ float: "right" }}
+            onClick={() => excuteTweet(this.text, this.file)}
+          >
+            tweet
+          </Button>
         </div>
       </div>
     );
   }
 }
 
-// export default withRouter(BtnAccout);
+export default function setFormTweet(excuteTweet) {
+  return <FormTweet excuteTweet={excuteTweet} />;
+}

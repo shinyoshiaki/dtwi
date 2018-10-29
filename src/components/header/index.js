@@ -1,6 +1,7 @@
 import React from "react";
 import { AppBar, Tabs, Tab, Toolbar, Button } from "@material-ui/core";
 import BtnAccout from "./btnAccount";
+import setBtnOpenTweet from "./btnOpenTweet";
 
 class Header extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { pages, titles } = this.props;
+    const { pages, titles, excuteTweet } = this.props;
     const { value } = this.state;
 
     return (
@@ -29,7 +30,8 @@ class Header extends React.Component {
               })}
             </Tabs>
             <BtnAccout />
-            <Button style={{ marginLeft: "auto" }}>tweet</Button>
+            {/* <Button style={{ marginLeft: "auto" }}>tweet</Button> */}
+            {setBtnOpenTweet(excuteTweet)}
           </Toolbar>
         </AppBar>
         {pages.map((v, i) => {
@@ -40,6 +42,6 @@ class Header extends React.Component {
   }
 }
 
-export function header(titles = [], pages = []) {
-  return <Header titles={titles} pages={pages} />;
+export function header(titles = [], pages = [], excuteTweet) {
+  return <Header titles={titles} pages={pages} excuteTweet={excuteTweet} />;
 }

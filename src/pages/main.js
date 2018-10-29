@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { header } from "../components/header";
-import { AppBar, Tabs, Tab, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
+import { tweet } from "../modules/twitter";
 
 function TabContainer(props) {
   return (
@@ -20,8 +21,13 @@ class Main extends React.Component {
     this.setState({ value });
   };
 
+  excuteTweet = (text, file) => {
+    const { dispatch, p2p } = this.props;
+    tweet(text, p2p.kad, dispatch, { picture: file });
+  };
+
   render() {
-    const { p2p } = this.props;    
+    const { p2p } = this.props;
 
     console.log({ p2p });
     return (
@@ -32,7 +38,8 @@ class Main extends React.Component {
             <TabContainer>Item One</TabContainer>,
             <TabContainer>Item Two</TabContainer>,
             <TabContainer>Item Three</TabContainer>
-          ]
+          ],
+          this.excuteTweet
         )}
       </div>
     );
