@@ -1,5 +1,14 @@
 import React from "react";
-import { AppBar, Tabs, Tab, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Toolbar,
+  Button,
+  IconButton
+} from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
+import BtnAccout from "./header/btnAccount";
 
 class Header extends React.Component {
   state = {
@@ -15,17 +24,21 @@ class Header extends React.Component {
     const { value } = this.state;
 
     return (
-      <div>
+      <div style={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ backgroundColor: "white" }}>
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            style={{ color: "black" }}
-          >
-            {titles.map(v => {
-              return <Tab label={v} />;
-            })}
-          </Tabs>
+          <Toolbar>
+            <Tabs
+              value={value}
+              onChange={this.handleChange}
+              style={{ color: "black" }}
+            >
+              {titles.map((v, i) => {
+                return <Tab label={v} key={i} />;
+              })}
+            </Tabs>
+            <BtnAccout />
+            <Button style={{ marginLeft: "auto" }}>tweet</Button>
+          </Toolbar>
         </AppBar>
         {pages.map((v, i) => {
           return value === i && v;
