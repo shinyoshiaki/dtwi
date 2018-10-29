@@ -4,10 +4,14 @@ import { header } from "../components/header";
 import setTweet from "../components/timelline/tweet";
 import { setTimeline } from "../components/timelline";
 import setBtnOpenTweet from "../components/header/btnOpenTweet";
+import { FormTweet } from "../components/header/formTweet";
+import { BtnPicFile } from "../components/header/btnPicFile";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
-  .add("btnOpenTweet", () => setBtnOpenTweet());
+  .add("btnOpenTweet", () => setBtnOpenTweet(<FormTweet />))
+  .add("formTweet", () => <FormTweet />)
+  .add("btnPicFile", () => <BtnPicFile />);
 
 storiesOf("Timeline", module)
   .add("timeline", () =>

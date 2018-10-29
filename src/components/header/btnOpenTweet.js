@@ -29,8 +29,8 @@ export class BtnOpenTweet extends Component {
         >
           <div
             style={{
-              width: "50%",
-              height: "50%",
+              width: "60%",
+              height: 280,
               flex: "0 1 auto",
               margin: "auto",
               background: "white"
