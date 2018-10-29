@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { header } from "../components/header";
 import { Typography } from "@material-ui/core";
 import { tweet } from "../modules/twitter";
+import MainTimeLine from "../containers/main/timeline";
+import Kademlia from "kad-rtc";
+import { createNodeList } from "../components/util/nodeList";
 
 function TabContainer(props) {
   return (
@@ -13,9 +16,28 @@ function TabContainer(props) {
 }
 
 class Main extends React.Component {
-  state = {
-    value: 0
-  };
+  constructor(props) {
+    super(props);
+    const { p2p, history } = this.props;
+    this.listenAddPeer(p2p.kad);
+    this.state = {
+      value: 0,
+      kbuckets: []
+    };
+
+    if (!p2p.kad) {
+      history.push("/");
+    }
+  }
+
+  listenAddPeer(kad) {
+    if (!kad) return;
+    console.log("addlister");
+    kad.callback.onAddPeer = data => {
+      console.log("onaddpeer", { data });
+      this.setState({ kbuckets: kad.kbuckets });
+    };
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -35,9 +57,9 @@ class Main extends React.Component {
         {header(
           ["one", "two", "three"],
           [
-            <TabContainer>Item One</TabContainer>,
+            <MainTimeLine />,
             <TabContainer>Item Two</TabContainer>,
-            <TabContainer>Item Three</TabContainer>
+            createNodeList(this.state.kbuckets)
           ],
           this.excuteTweet
         )}

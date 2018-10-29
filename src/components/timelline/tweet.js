@@ -8,7 +8,7 @@ export class Tweet extends Component {
     return (
       <div
         style={{
-          width: "70%",
+          width: "50%",
           border: "1px solid",
           borderRadius: 4,
           borderWidth: 0.5,
@@ -37,6 +37,12 @@ export class Tweet extends Component {
   }
 }
 
-export default function setTweet(id, time, msg, opt = { pic: undefined }) {
-  return <Tweet id={id} time={time} msg={msg} pic={opt.pic} />;
+export default function setTweet(
+  id,
+  time,
+  msg,
+  index,
+  opt = { pic: undefined }
+) {
+  return <Tweet id={id} time={time} msg={msg} pic={opt.pic} index={index} />;
 }

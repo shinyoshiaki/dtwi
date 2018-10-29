@@ -2,20 +2,32 @@ import Kademlia from "kad-rtc";
 import { iTweet } from "../interface/iTwitter";
 
 export const initialState = {
-  myTweets: []
+  myTweets: [],
+  tweets: []
 };
 
 export const Istate = {
-  myTweets: "myTweets"
+  myTweets: "myTweets",
+  tweets: "tweets"
 };
 
 export const actionType = {
   SET_VALUE: "SET_VALUE",
-  TWEET: "TWEET"
+  PUSH_ARR: "PUSH_ARR"
 };
 
-export function event(kad = new Kademlia()) {
-  kad.events.store["twitter.js"] = value => {};
+export function event(kad = new Kademlia(), dispatch) {
+  console.log({ kad });
+  kad.events.store["twitter.js"] = value => {
+    console.log("twitter event", { value });
+    if (value.type === "tweet") {
+      console.log("on tweet");
+      dispatch({
+        type: actionType.PUSH_ARR,
+        data: { key: Istate.tweets, value }
+      });
+    }
+  };
 }
 
 export function tweet(
@@ -27,7 +39,10 @@ export function tweet(
   const tweet = iTweet(kad.nodeId, Date.now(), value, { pic: opt.picture });
 
   kad.store(kad.nodeId, tweet.hash, tweet);
-  dispatch({ type: actionType.TWEET, data: tweet });
+  dispatch({
+    type: actionType.PUSH_ARR,
+    data: { key: Istate.myTweets, value: tweet }
+  });
 }
 
 export function setValue(key, value, dispatch) {
@@ -39,11 +54,12 @@ export default function reducer(state = initialState, action) {
     case actionType.SET_VALUE:
       state[action.data.key] = action.data.value;
       return state;
-    case actionType.TWEET:
+    case actionType.PUSH_ARR:
       return {
         ...state,
-        myTweets: state.myTweets.concat(action.data)
+        [action.data.key]: state[action.data.key].concat(action.data.value)
       };
+
     default:
       return state;
   }

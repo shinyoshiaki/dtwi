@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Button, TextField, Typography } from "@material-ui/core";
 import { setValue, Istate } from "../modules/p2p";
 import Node from "kad-rtc/lib/node/node";
+import { event } from "../modules/twitter";
 
 class Login extends React.Component {
   targetAddress = "35.196.94.146";
@@ -16,6 +17,9 @@ class Login extends React.Component {
     const node = new Node(this.targetAddress, this.targetPort);
     setValue(Istate.node, node, dispatch);
     setValue(Istate.kad, node.kad, dispatch);
+
+    event(node.kad, dispatch);
+
     this.props.history.push("/main");
   };
 

@@ -2284,20 +2284,10 @@ babel-jest@23.6.0, babel-jest@^23.6.0:
     babel-plugin-istanbul "^4.1.6"
     babel-preset-jest "^23.2.0"
 
-babel-loader@8.0.4:
+babel-loader@8.0.4, babel-loader@^8.0.4:
   version "8.0.4"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.4.tgz#7bbf20cbe4560629e2e41534147692d3fecbdce6"
   integrity sha512-fhBhNkUToJcW9nV46v8w87AJOwAJDz84c1CL57n3Stj73FANM/b9TbCUK4YhdOwEyZ+OxhYpdeZDNzSI29Firw==
-  dependencies:
-    find-cache-dir "^1.0.0"
-    loader-utils "^1.0.2"
-    mkdirp "^0.5.1"
-    util.promisify "^1.0.0"
-
-babel-loader@^8.0.0-beta.6:
-  version "8.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.0.0-beta.6.tgz#e28e51e8bd118b97861e6d14880684116e979f30"
-  integrity sha512-T3PmmlhIK8TnCYKTjHf+uNfU8m6GvoE8hu3++GR+yYT9ZtC5Jvuq3ZHKP4OffzDTXlC/7lUJbfvyfU9i/XebNg==
   dependencies:
     find-cache-dir "^1.0.0"
     loader-utils "^1.0.2"
@@ -7477,8 +7467,8 @@ jsx-ast-utils@^2.0.1:
     sha1 "^1.1.1"
 
 "kad-rtc@git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#bson":
-  version "0.0.28"
-  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#e1c57b4915c8df8035c852eeaecbc120d6e6859b"
+  version "0.0.29"
+  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#4044d2b05a515abcc0ae80384dc85f4fac9d6200"
   dependencies:
     bson "^3.0.2"
     buffer-to-arraybuffer "^0.0.5"

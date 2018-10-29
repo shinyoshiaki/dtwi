@@ -46,7 +46,7 @@ export class BtnOpenTweet extends Component {
               </Typography>
             </div>
             <br />
-            {setFormTweet(excuteTweet)}
+            {setFormTweet(excuteTweet, this.handleClose)}
           </div>
         </Modal>
       </div>

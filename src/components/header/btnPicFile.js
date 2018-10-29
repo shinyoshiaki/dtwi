@@ -16,9 +16,7 @@ export class BtnPicFile extends Component {
           onChange={this.handleFile}
         />
         <label htmlFor="raised-button-file">
-          <Button raised component="span">
-            picture
-          </Button>
+          <Button>picture</Button>
         </label>
       </div>
     );

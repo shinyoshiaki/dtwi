@@ -11,7 +11,7 @@ export class FormTweet extends Component {
   };
 
   render() {
-    const { excuteTweet } = this.props;
+    const { excuteTweet, closeModal } = this.props;
     return (
       <div style={{ margin: 10 }}>
         <TextField
@@ -28,7 +28,10 @@ export class FormTweet extends Component {
           <div style={{ float: "left" }}>{setBtnPicFile(this.btnPicFile)}</div>
           <Button
             style={{ float: "right" }}
-            onClick={() => excuteTweet(this.text, this.file)}
+            onClick={() => {
+              excuteTweet(this.text, this.file);
+              closeModal();
+            }}
           >
             tweet
           </Button>
@@ -38,6 +41,6 @@ export class FormTweet extends Component {
   }
 }
 
-export default function setFormTweet(excuteTweet) {
-  return <FormTweet excuteTweet={excuteTweet} />;
+export default function setFormTweet(excuteTweet, closeModal) {
+  return <FormTweet excuteTweet={excuteTweet} closeModal={closeModal} />;
 }

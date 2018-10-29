@@ -13,8 +13,8 @@ export class Timeline extends Component {
           alignItems: "center"
         }}
       >
-        {tweets.map(v => {
-          return setTweet(v.id, v.time, v.msg, { pic: v.pic });
+        {tweets.map((v,i) => {
+          return setTweet(v.id, v.time, v.msg, i,{ pic: v.pic });
         })}
       </div>
     );
