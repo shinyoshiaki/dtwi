@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  AppBar,
-  Tabs,
-  Tab,
-  Toolbar,
-  Button,
-  IconButton
-} from "@material-ui/core";
-import { AccountCircle } from "@material-ui/icons";
-import BtnAccout from "./header/btnAccount";
+import { AppBar, Tabs, Tab, Toolbar, Button } from "@material-ui/core";
+import BtnAccout from "./btnAccount";
 
 class Header extends React.Component {
   state = {

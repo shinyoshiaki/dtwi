@@ -6,9 +6,6 @@
   "dependencies": {
     "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
-    "carbon-components": "^9.40.0",
-    "carbon-components-react": "^6.44.0",
-    "carbon-icons": "^7.0.7",
     "history": "^4.7.2",
     "kad-rtc": "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#bson",
     "react": "^16.6.0",
@@ -26,6 +23,11 @@
     "to-array-buffer": "^2.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@storybook/addon-actions": "^4.0.0",
+    "@storybook/addon-links": "^4.0.0",
+    "@storybook/addons": "^4.0.0",
+    "@storybook/react": "^4.0.0",
     "@types/history": "^4.7.2",
     "@types/react": "^16.4.18",
     "@types/react-dom": "^16.0.9",
@@ -38,10 +40,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/sha1": "^1.1.1",
     "@types/socket.io-client": "^1.4.32",
-    "@storybook/addon-actions": "^3.4.11",
-    "@storybook/addon-links": "^3.4.11",
-    "@storybook/addons": "^3.4.11",
-    "@storybook/react": "^3.4.11"
+    "babel-loader": "^8.0.0-beta.6"
   },
   "scripts": {
     "start": "react-scripts start",

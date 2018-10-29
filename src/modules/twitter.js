@@ -1,8 +1,8 @@
 import Kademlia from "kad-rtc";
-import sha1 from "sha1";
+import { iTweet } from "../interface/iTwitter";
 
 export const initialState = {
-  myTweets: {}
+  myTweets: []
 };
 
 export const Istate = {
@@ -14,22 +14,20 @@ export const actionType = {
   TWEET: "TWEET"
 };
 
+export function event(kad = new Kademlia()) {
+  kad.events.store["twitter.js"] = value => {};
+}
+
 export function tweet(
   value,
   kad = new Kademlia(),
   dispatch,
   opt = { picture: undefined }
 ) {
-  const tweet = {
-    sender: kad.nodeId,
-    msg: value,
-    seed: Math.random()
-  };
-  if (opt.picture) tweet.pic = opt.picture;
-  const hash = sha1(JSON.stringify(tweet)).toString();
+  const tweet = iTweet(kad.nodeId, Date.now(), value, { pic: opt.picture });
 
-  kad.store(kad.nodeId, hash, tweet);
-  dispatch({ type: actionType.TWEET, data: { tweet, hash } });
+  kad.store(kad.nodeId, tweet.hash, tweet);
+  dispatch({ type: actionType.TWEET, data: tweet });
 }
 
 export function setValue(key, value, dispatch) {
@@ -44,7 +42,7 @@ export default function reducer(state = initialState, action) {
     case actionType.TWEET:
       return {
         ...state,
-        myTweets: (state.myTweets[action.data.hash] = action.data.tweet)
+        myTweets: state.myTweets.concat(action.data)
       };
     default:
       return state;

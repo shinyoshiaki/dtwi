@@ -3,8 +3,11 @@ import { storiesOf } from "@storybook/react";
 import { header } from "../components/header";
 import setTweet from "../components/timelline/tweet";
 import { setTimeline } from "../components/timelline";
+import setBtnOpenTweet from "../components/header/btnOpenTweet";
 
-storiesOf("Header", module).add("index", () => header([1, 2, 3], [1, 2, 3]));
+storiesOf("Header", module)
+  .add("index", () => header([1, 2, 3], [1, 2, 3]))
+  .add("btnOpenTweet", () => setBtnOpenTweet());
 
 storiesOf("Timeline", module)
   .add("timeline", () =>
