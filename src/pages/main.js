@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { tweet } from "../modules/twitter";
 import setMainContext from "../components/main";
+import { setValue, Istate } from "../modules/condition";
 
 class Main extends React.Component {
   constructor(props) {
@@ -36,8 +37,17 @@ class Main extends React.Component {
     tweet(text, p2p.kad, dispatch, twitter, { picture: file });
   };
 
+  setFile = chunks => {
+    const { dispatch } = this.props;
+    setValue(Istate.selectFile, chunks, dispatch);
+  };
+
   render() {
-    return <div>{setMainContext(this.excuteTweet, this.state.kbuckets)}</div>;
+    return (
+      <div>
+        {setMainContext(this.excuteTweet, this.state.kbuckets, this.setFile)}
+      </div>
+    );
   }
 }
 
