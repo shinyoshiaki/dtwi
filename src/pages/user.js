@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { IconButton } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
-import { Istate, findTweet, initialState } from "../modules/twitter";
+import { Istate, findTweet, initialState, follow } from "../modules/twitter";
 import { setTimeline } from "../components/timelline";
 import setUserContext from "../components/user";
 
@@ -27,7 +27,7 @@ class User extends Component {
 
   getTargetTweets(target, state = initialState) {
     const tweets = [];
-    state.tweets.forEach(tweet => {
+    state.timeline.forEach(tweet => {
       if (tweet.id === target) {
         tweets.push(tweet);
       }
@@ -35,11 +35,20 @@ class User extends Component {
     return tweets;
   }
 
+  follow = id => {
+    const { dispatch } = this.props;
+    follow(id, dispatch);
+  };
+
   render() {
     const { twitter, condition } = this.props;
     const tweets = this.getTargetTweets(condition.findUser, twitter);
 
-    return <div>{setUserContext(tweets, this.toMain)}</div>;
+    return (
+      <div>
+        {setUserContext(tweets, this.toMain, this.follow, condition.findUser)}
+      </div>
+    );
   }
 }
 

@@ -17,8 +17,7 @@ export function setValue(key, value, dispatch) {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case actionType.SET_VALUE:
-      state[action.data.key] = action.data.value;
-      return state;
+      return { ...state, [action.data.key]: action.data.value };
     default:
       return state;
   }

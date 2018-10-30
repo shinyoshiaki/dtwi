@@ -5,13 +5,14 @@ import sha1 from "sha1";
 export const initialState = {
   myTweets: [],
   lastTweet: undefined,
-  tweets: [],
-  userTweets: {}
+  timeline: [],
+  userTweets: {},
+  followIds: []
 };
 
 export const Istate = {
   myTweets: "myTweets",
-  tweets: "tweets",
+  timeline: "timeline",
   lastTweet: "lastTweet"
 };
 
@@ -19,7 +20,8 @@ export const actionType = {
   SET_VALUE: "TWITTER_SET_VALUE",
   PUSH_ARR: "TWITTER_PUSH_ARR",
   RESET_USER_TWEET: "TWITTER_RESET_USER_TWEET",
-  ADD_USER_TWEET: "TWITTER_ADD_USER_TWEET"
+  ADD_USER_TWEET: "TWITTER_ADD_USER_TWEET",
+  FOLLOW: "TWITTER_FOLLOW"
 };
 
 export function event(kad = new Kademlia(), dispatch) {
@@ -28,10 +30,7 @@ export function event(kad = new Kademlia(), dispatch) {
     console.log("twitter event", { value });
     if (value.type === "tweet") {
       console.log("on tweet");
-      dispatch({
-        type: actionType.PUSH_ARR,
-        data: { key: Istate.tweets, value }
-      });
+      getTimeline(kad, dispatch);
     }
   };
 }
@@ -43,15 +42,29 @@ export async function findTweet(key, kad = new Kademlia(), dispatch) {
     if (!result) break;
     if (result.type === "tweet") {
       console.log("find tweet");
-      dispatch({
-        type: actionType.ADD_USER_TWEET,
-        data: result
-      });
+      getTimeline(kad, dispatch);
       key = result.hash;
     } else {
       break;
     }
   }
+}
+
+function getTimeline(kad = new Kademlia(), dispatch) {
+  const kvs = kad.keyValueList;
+  const timeline = [];
+  Object.keys(kvs).forEach(key => {
+    const value = kvs[key];
+    if (value.type === "tweet") {
+      timeline.push(value);
+    }
+  });
+  const sort = timeline
+    .sort((a, b) => {
+      return a.time - b.time;
+    })
+    .reverse();
+  setValue(Istate.timeline, sort, dispatch);
 }
 
 export function tweet(
@@ -74,6 +87,10 @@ export function tweet(
   });
 }
 
+export function follow(id, dispatch) {
+  dispatch({ type: actionType.FOLLOW, data: id });
+}
+
 export function setValue(key, value, dispatch) {
   dispatch({ type: actionType.SET_VALUE, data: { key, value } });
 }
@@ -81,8 +98,7 @@ export function setValue(key, value, dispatch) {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case actionType.SET_VALUE:
-      state[action.data.key] = action.data.value;
-      return state;
+      return { ...state, [action.data.key]: action.data.value };
     case actionType.PUSH_ARR:
       return {
         ...state,
@@ -98,6 +114,10 @@ export default function reducer(state = initialState, action) {
         ...state,
         userTweets: state.userTweets
       };
+    case actionType.FOLLOW:
+      if (!state.followIds.includes(action.data))
+        state.followIds.push(action.data);
+      return { ...state, followIds: state.followIds };
     default:
       return state;
   }

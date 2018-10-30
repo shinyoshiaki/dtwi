@@ -8,15 +8,21 @@ export const { Provider, Consumer } = Context;
 
 export class MainContext extends Component {
   render() {
-    const { excuteTweet, kbuckets } = this.props;
+    const { excuteTweet, kbuckets, reload } = this.props;
     return (
-      <Provider value={{ excuteTweet }}>
+      <Provider value={{ excuteTweet, reload }}>
         {header(["one", "two"], [<MainTimeLine />, createNodeList(kbuckets)])}
       </Provider>
     );
   }
 }
 
-export default function setMainContext(excuteTweet, kbuckets) {
-  return <MainContext excuteTweet={excuteTweet} kbuckets={kbuckets} />;
+export default function setMainContext(excuteTweet, kbuckets, reload) {
+  return (
+    <MainContext
+      excuteTweet={excuteTweet}
+      kbuckets={kbuckets}
+      reload={reload}
+    />
+  );
 }

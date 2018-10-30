@@ -29,7 +29,7 @@ export class Tweet extends Component {
         </Button>
         <br />
         <div style={{ float: "right", marginRight: 20, marginBottom: 20 }}>
-          {tweet.time}
+          {new Date(tweet.time).toString()}
         </div>
         <br />
         <div style={{ marginLeft: 50 }}>

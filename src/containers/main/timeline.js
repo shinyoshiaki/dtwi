@@ -14,17 +14,20 @@ class MainTimeLine extends Component {
 
   render() {
     const { twitter } = this.props;
-    console.log({ twitter }, this.props);
+    console.log("timeline container render", { twitter });
     return (
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",          
+          alignItems: "center"
         }}
       >
-        {setTimeline(twitter[Istate.tweets], { onClickId: this.onClickId })}
+        {() => {
+          console.log("timeline test", twitter.timeline);
+        }}
+        {setTimeline(twitter.timeline, { onClickId: this.onClickId })}
       </div>
     );
   }

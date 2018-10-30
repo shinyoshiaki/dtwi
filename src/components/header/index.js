@@ -2,6 +2,7 @@ import React from "react";
 import { AppBar, Tabs, Tab, Toolbar, Button } from "@material-ui/core";
 import BtnAccout from "./btnAccount";
 import setBtnOpenTweet from "./btnOpenTweet";
+import BtnReloadTimeline from "../main/btnReloadTimeline";
 
 class Header extends React.Component {
   state = {
@@ -29,8 +30,8 @@ class Header extends React.Component {
                 return <Tab label={v} key={i} />;
               })}
             </Tabs>
+            <BtnReloadTimeline />
             <BtnAccout />
-            {/* <Button style={{ marginLeft: "auto" }}>tweet</Button> */}
             {setBtnOpenTweet()}
           </Toolbar>
         </AppBar>

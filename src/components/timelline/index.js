@@ -3,11 +3,11 @@ import setTweet from "./tweet";
 
 export class Timeline extends Component {
   render() {
-    const { tweets, opt } = this.props;
-    console.log("timeline render", { opt });
+    const { timeline, opt } = this.props;
+    console.log("timeline render", { timeline });
     return (
       <div style={{ width: "50%" }}>
-        {tweets.map((v, i) => {
+        {timeline.map((v, i) => {
           return setTweet(v, i, opt);
         })}
       </div>
@@ -15,6 +15,7 @@ export class Timeline extends Component {
   }
 }
 
-export function setTimeline(tweets = [], opt = { onClickId: () => {} }) {
-  return <Timeline tweets={tweets} opt={opt} />;
+export function setTimeline(timeline=[], opt = { onClickId: () => {} }) {
+  console.log("settimeline", { timeline });
+  return <Timeline timeline={timeline} opt={opt} />;
 }
