@@ -16,8 +16,7 @@ export class BtnOpenTweet extends Component {
     this.setState({ open: false });
   };
 
-  render() {
-    const { excuteTweet } = this.props;
+  render() {    
     return (
       <div>
         <Button onClick={this.handleOpen}>tweet</Button>
@@ -46,7 +45,7 @@ export class BtnOpenTweet extends Component {
               </Typography>
             </div>
             <br />
-            {setFormTweet(excuteTweet, this.handleClose)}
+            {setFormTweet( this.handleClose)}
           </div>
         </Modal>
       </div>
@@ -54,6 +53,6 @@ export class BtnOpenTweet extends Component {
   }
 }
 
-export default function setBtnOpenTweet(excuteTweet) {
-  return <BtnOpenTweet excuteTweet={excuteTweet} />;
+export default function setBtnOpenTweet() {
+  return <BtnOpenTweet />;
 }

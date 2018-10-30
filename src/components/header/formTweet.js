@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
 import setBtnPicFile from "./btnPicFile";
+import { Consumer } from "../main";
 
 export class FormTweet extends Component {
   text;
@@ -11,36 +12,44 @@ export class FormTweet extends Component {
   };
 
   render() {
-    const { excuteTweet, closeModal } = this.props;
+    const { closeModal } = this.props;
     return (
-      <div style={{ margin: 10 }}>
-        <TextField
-          label="tweet"
-          multiline
-          margin="normal"
-          variant="outlined"
-          rows="6"
-          style={{ width: "100%" }}
-          onChange={e => (this.text = e.target.value)}
-        />
-        <br />
-        <div style={{ bottom: 0 }}>
-          <div style={{ float: "left" }}>{setBtnPicFile(this.btnPicFile)}</div>
-          <Button
-            style={{ float: "right" }}
-            onClick={() => {
-              excuteTweet(this.text, this.file);
-              closeModal();
-            }}
-          >
-            tweet
-          </Button>
-        </div>
-      </div>
+      <Consumer>
+        {context => {
+          return (
+            <div style={{ margin: 10 }}>
+              <TextField
+                label="tweet"
+                multiline
+                margin="normal"
+                variant="outlined"
+                rows="6"
+                style={{ width: "100%" }}
+                onChange={e => (this.text = e.target.value)}
+              />
+              <br />
+              <div style={{ bottom: 0 }}>
+                <div style={{ float: "left" }}>
+                  {setBtnPicFile(this.btnPicFile)}
+                </div>
+                <Button
+                  style={{ float: "right" }}
+                  onClick={() => {
+                    context.excuteTweet(this.text, this.file);
+                    closeModal();
+                  }}
+                >
+                  tweet
+                </Button>
+              </div>
+            </div>
+          );
+        }}
+      </Consumer>
     );
   }
 }
 
-export default function setFormTweet(excuteTweet, closeModal) {
-  return <FormTweet excuteTweet={excuteTweet} closeModal={closeModal} />;
+export default function setFormTweet(closeModal) {
+  return <FormTweet closeModal={closeModal} />;
 }

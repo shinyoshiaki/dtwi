@@ -3,24 +3,18 @@ import setTweet from "./tweet";
 
 export class Timeline extends Component {
   render() {
-    const { tweets } = this.props;
+    const { tweets, opt } = this.props;
+    console.log("timeline render", { opt });
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        {tweets.map((v,i) => {
-          return setTweet(v.id, v.time, v.msg, i,{ pic: v.pic });
+      <div style={{ width: "50%" }}>
+        {tweets.map((v, i) => {
+          return setTweet(v, i, opt);
         })}
       </div>
     );
   }
 }
 
-export function setTimeline(tweets = []) {
-  return <Timeline tweets={tweets} />;
+export function setTimeline(tweets = [], opt = { onClickId: () => {} }) {
+  return <Timeline tweets={tweets} opt={opt} />;
 }

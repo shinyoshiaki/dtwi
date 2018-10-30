@@ -13,7 +13,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { pages, titles, excuteTweet } = this.props;
+    const { pages, titles } = this.props;
     const { value } = this.state;
 
     return (
@@ -31,7 +31,7 @@ class Header extends React.Component {
             </Tabs>
             <BtnAccout />
             {/* <Button style={{ marginLeft: "auto" }}>tweet</Button> */}
-            {setBtnOpenTweet(excuteTweet)}
+            {setBtnOpenTweet()}
           </Toolbar>
         </AppBar>
         {pages.map((v, i) => {
@@ -42,6 +42,6 @@ class Header extends React.Component {
   }
 }
 
-export function header(titles = [], pages = [], excuteTweet) {
-  return <Header titles={titles} pages={pages} excuteTweet={excuteTweet} />;
+export function header(titles = [], pages = []) {
+  return <Header titles={titles} pages={pages} />;
 }

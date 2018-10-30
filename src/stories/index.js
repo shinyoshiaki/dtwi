@@ -14,18 +14,51 @@ storiesOf("Header", module)
   .add("btnPicFile", () => <BtnPicFile />);
 
 storiesOf("Timeline", module)
-  .add("timeline", () =>
-    setTimeline([
-      {
-        id: "1",
-        time: "0000",
-        msg: "hello"
-      },
-      {
-        id: "2",
-        time: "0000",
-        msg: "hellow"
-      }
-    ])
-  )
+  .add("timeline center", () => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }}
+    >
+      {setTimeline([
+        {
+          id: "1",
+          time: "0000",
+          msg: "hello"
+        },
+        {
+          id: "2",
+          time: "0000",
+          msg: "hellow"
+        }
+      ])}
+    </div>
+  ))
+  .add("timeline right", () => (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+        width: "100%"
+      }}
+    >
+      <div style={{ width: "100%" }}>
+        {setTimeline([
+          {
+            id: "1",
+            time: "0000",
+            msg: "hello"
+          },
+          {
+            id: "2",
+            time: "0000",
+            msg: "hellow"
+          }
+        ])}
+      </div>
+    </div>
+  ))
   .add("tweet", () => setTweet("test", "1000", "helloworld"));

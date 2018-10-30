@@ -7466,9 +7466,9 @@ jsx-ast-utils@^2.0.1:
   dependencies:
     sha1 "^1.1.1"
 
-"kad-rtc@git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#bson":
-  version "0.0.29"
-  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#4044d2b05a515abcc0ae80384dc85f4fac9d6200"
+"kad-rtc@git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#dtwi":
+  version "0.0.3"
+  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#db6853e5932a16f791684c49e225b00d4bd7c930"
   dependencies:
     bson "^3.0.2"
     buffer-to-arraybuffer "^0.0.5"

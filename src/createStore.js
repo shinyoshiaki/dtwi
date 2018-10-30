@@ -10,6 +10,7 @@ import { routerReducer, routerMiddleware } from "react-router-redux";
 
 import p2pReducer from "./modules/p2p";
 import twitter from "./modules/twitter";
+import condition from "./modules/condition";
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
@@ -19,7 +20,8 @@ export default function createStore() {
     combineReducers({
       p2p: p2pReducer,
       router: routerReducer,
-      twitter
+      twitter,
+      condition
     }),
     applyMiddleware(thunk, logger, middleware)
   );

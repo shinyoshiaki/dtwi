@@ -1,19 +1,25 @@
 import Kademlia from "kad-rtc";
 import { iTweet } from "../interface/iTwitter";
+import sha1 from "sha1";
 
 export const initialState = {
   myTweets: [],
-  tweets: []
+  lastTweet: undefined,
+  tweets: [],
+  userTweets: {}
 };
 
 export const Istate = {
   myTweets: "myTweets",
-  tweets: "tweets"
+  tweets: "tweets",
+  lastTweet: "lastTweet"
 };
 
 export const actionType = {
-  SET_VALUE: "SET_VALUE",
-  PUSH_ARR: "PUSH_ARR"
+  SET_VALUE: "TWITTER_SET_VALUE",
+  PUSH_ARR: "TWITTER_PUSH_ARR",
+  RESET_USER_TWEET: "TWITTER_RESET_USER_TWEET",
+  ADD_USER_TWEET: "TWITTER_ADD_USER_TWEET"
 };
 
 export function event(kad = new Kademlia(), dispatch) {
@@ -30,15 +36,38 @@ export function event(kad = new Kademlia(), dispatch) {
   };
 }
 
+export async function findTweet(key, kad = new Kademlia(), dispatch) {
+  dispatch({ type: actionType.RESET_USER_TWEET, data: key });
+  for (;;) {
+    const result = await kad.findValue(key).catch(console.log);
+    if (!result) break;
+    if (result.type === "tweet") {
+      console.log("find tweet");
+      dispatch({
+        type: actionType.ADD_USER_TWEET,
+        data: result
+      });
+      key = result.hash;
+    } else {
+      break;
+    }
+  }
+}
+
 export function tweet(
   value,
   kad = new Kademlia(),
   dispatch,
+  state = initialState,
   opt = { picture: undefined }
 ) {
   const tweet = iTweet(kad.nodeId, Date.now(), value, { pic: opt.picture });
-
-  kad.store(kad.nodeId, tweet.hash, tweet);
+  if (state.lastTweet) {
+    kad.store(kad.nodeId, state.lastTweet.hash, tweet);
+  } else {
+    kad.store(kad.nodeId, kad.nodeId, tweet);
+  }
+  setValue(Istate.lastTweet, tweet, dispatch);
   dispatch({
     type: actionType.PUSH_ARR,
     data: { key: Istate.myTweets, value: tweet }
@@ -59,7 +88,16 @@ export default function reducer(state = initialState, action) {
         ...state,
         [action.data.key]: state[action.data.key].concat(action.data.value)
       };
-
+    case actionType.RESET_USER_TWEET:
+      state.userTweets[action.data] = [];
+      return { ...state, userTweets: state.userTweets };
+    case actionType.ADD_USER_TWEET:
+      console.log("twitterjs reducer", { state });
+      state.userTweets[action.data.id].push(action.data);
+      return {
+        ...state,
+        userTweets: state.userTweets
+      };
     default:
       return state;
   }
