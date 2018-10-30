@@ -74,17 +74,19 @@ export function tweet(
   state = initialState,
   opt = { picture: undefined }
 ) {
-  const tweet = iTweet(kad.nodeId, Date.now(), value, { pic: opt.picture });
+  console.log("tweet module", { opt });
+  const pictureAddress = sha1(Math.random().toString()).toString();
+  const tweet = opt.picture
+    ? iTweet(kad.nodeId, Date.now(), value, { pic: pictureAddress })
+    : iTweet(kad.nodeId, Date.now(), value);
   if (state.lastTweet) {
     kad.store(kad.nodeId, state.lastTweet.hash, tweet);
   } else {
     kad.store(kad.nodeId, kad.nodeId, tweet);
   }
+  if (opt.picture) kad.storeChunks(kad.nodeId, pictureAddress, opt.picture);
   setValue(Istate.lastTweet, tweet, dispatch);
-  dispatch({
-    type: actionType.PUSH_ARR,
-    data: { key: Istate.myTweets, value: tweet }
-  });
+  pushArray(Istate.myTweets, tweet, dispatch);
 }
 
 export function follow(id, dispatch) {
@@ -93,6 +95,10 @@ export function follow(id, dispatch) {
 
 export function setValue(key, value, dispatch) {
   dispatch({ type: actionType.SET_VALUE, data: { key, value } });
+}
+
+export function pushArray(key, value, dispatch) {
+  dispatch({ type: actionType.PUSH_ARR, data: { key, value } });
 }
 
 export default function reducer(state = initialState, action) {

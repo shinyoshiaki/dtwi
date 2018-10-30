@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
 import BtnPicFile from "./btnPicFile";
 import { Consumer } from "../main";
+import setBtnPicFile from "./btnPicFile";
 
 export class FormTweet extends Component {
   text;
@@ -30,7 +31,7 @@ export class FormTweet extends Component {
               <br />
               <div style={{ bottom: 0 }}>
                 <div style={{ float: "left" }}>
-                  <BtnPicFile />
+                  {setBtnPicFile(this.handlePicFile)}
                 </div>
                 <Button
                   style={{ float: "right" }}

@@ -45,7 +45,12 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        {setMainContext(this.excuteTweet, this.state.kbuckets, this.setFile)}
+        {setMainContext(
+          this.excuteTweet,
+          this.state.kbuckets,
+          {},
+          this.setFile
+        )}
       </div>
     );
   }

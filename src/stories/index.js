@@ -5,7 +5,7 @@ import setTweet from "../components/timelline/tweet";
 import { setTimeline } from "../components/timelline";
 import setBtnOpenTweet from "../components/header/btnOpenTweet";
 import { FormTweet } from "../components/header/formTweet";
-import { BtnPicFile } from "../components/header/btnPicFile";
+import BtnPicFile from "../components/header/btnPicFile";
 import FormBadge from "../components/user/badge";
 import setUserContext from "../components/user";
 

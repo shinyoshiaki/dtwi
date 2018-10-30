@@ -8,7 +8,7 @@ export const { Provider, Consumer } = Context;
 
 export class MainContext extends Component {
   render() {
-    const { excuteTweet, kbuckets, reload,setFile } = this.props;
+    const { excuteTweet, kbuckets, reload, setFile } = this.props;
     return (
       <Provider value={{ excuteTweet, reload, setFile }}>
         {header(["one", "two"], [<MainTimeLine />, createNodeList(kbuckets)])}
