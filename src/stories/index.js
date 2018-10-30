@@ -6,6 +6,8 @@ import { setTimeline } from "../components/timelline";
 import setBtnOpenTweet from "../components/header/btnOpenTweet";
 import { FormTweet } from "../components/header/formTweet";
 import { BtnPicFile } from "../components/header/btnPicFile";
+import FormBadge from "../components/user/badge";
+import setUserContext from "../components/user";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -62,3 +64,9 @@ storiesOf("Timeline", module)
     </div>
   ))
   .add("tweet", () => setTweet("test", "1000", "helloworld"));
+
+storiesOf("user", module)
+  .add("badge", () => <FormBadge />)
+  .add("index", () => {
+    return setUserContext();
+  });

@@ -4,6 +4,7 @@ import { IconButton } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import { Istate, findTweet, initialState } from "../modules/twitter";
 import { setTimeline } from "../components/timelline";
+import setUserContext from "../components/user";
 
 class User extends Component {
   constructor(props) {
@@ -38,14 +39,7 @@ class User extends Component {
     const { twitter, condition } = this.props;
     const tweets = this.getTargetTweets(condition.findUser, twitter);
 
-    return (
-      <div>
-        <IconButton onClick={this.toMain} style={{ marginLeft: "auto" }}>
-          <ArrowBack />
-        </IconButton>
-        {setTimeline(tweets)}
-      </div>
-    );
+    return <div>{setUserContext(tweets, this.toMain)}</div>;
   }
 }
 

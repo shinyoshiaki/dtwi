@@ -10,7 +10,7 @@ export class MainContext extends Component {
   render() {
     const { excuteTweet, kbuckets } = this.props;
     return (
-      <Provider value={{ excuteTweet: excuteTweet }}>
+      <Provider value={{ excuteTweet }}>
         {header(["one", "two"], [<MainTimeLine />, createNodeList(kbuckets)])}
       </Provider>
     );
