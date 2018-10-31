@@ -17,6 +17,7 @@ export function getSliceArrayBuffer(blob) {
       if (currentChunk < chunks) {
         loadNext();
       } else {
+        console.log("getfileslice", { arr });
         resolve(arr);
       }
     };

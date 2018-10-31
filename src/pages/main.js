@@ -51,7 +51,9 @@ class Main extends React.Component {
         if (Object.keys(kad.keyValueList).includes(url)) {
           console.log("fownd picture", kad.keyValueList[url]);
           try {
-            resolve(new Blob(kad.keyValueList[url]));
+            resolve(
+              window.URL.createObjectURL(new Blob(kad.keyValueList[url].chunks))
+            );
           } catch (error) {
             reject("findpicture blob error", { error });
           }
@@ -60,7 +62,9 @@ class Main extends React.Component {
           const result = await kad.findValue(url).catch(console.log);
           if (!result) reject("file not fownd");
           try {
-            resolve(new Blob(result.chunks));
+            console.log("findpicture findvalue", { result });
+
+            resolve(window.URL.createObjectURL(new Blob(result.chunks)));
           } catch (error) {
             reject("findpicture blob error", { error }, { result });
           }

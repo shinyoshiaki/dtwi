@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Consumer } from "../main";
-import { blob2DataUrl } from "../../lib/file";
 
 export class ImageTweet extends Component {
   state = {
@@ -14,10 +13,10 @@ export class ImageTweet extends Component {
       const result = await this.context
         .findPicture(imageUrl)
         .catch(console.log);
-      const url = await blob2DataUrl(result);
+
       if (result) {
-        console.log("picture set img", { url });
-        this.setState({ imgsrc: url });
+        console.log("picture set img", { result });
+        this.setState({ imgsrc: result });
       }
     }
   }
@@ -28,6 +27,7 @@ export class ImageTweet extends Component {
         {context => {
           context = context || {};
           this.context = context;
+          console.log("picture render", this.state.imgsrc);
           return <img src={this.state.imgsrc} alt="" />;
         }}
       </Consumer>
