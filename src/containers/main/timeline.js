@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setTimeline } from "../../components/timelline";
-import { Istate } from "../../modules/twitter";
 import { setValue, Istate as condition } from "../../modules/condition";
 import { withRouter } from "react-router";
 

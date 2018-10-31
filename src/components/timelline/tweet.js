@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { IconButton, Button } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
+import setImageTweet from "./picture";
 
 export class Tweet extends Component {
   render() {
@@ -34,7 +35,8 @@ export class Tweet extends Component {
         <br />
         <div style={{ marginLeft: 50 }}>
           {tweet.msg}
-          {tweet.pic}
+          <br />
+          {setImageTweet(tweet.pic)}
         </div>
         <br />
         <Button>name</Button>

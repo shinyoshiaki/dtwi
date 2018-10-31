@@ -29,3 +29,14 @@ export function getSliceArrayBuffer(blob) {
     loadNext();
   });
 }
+
+export function blob2DataUrl(blob) {
+  return new Promise(resolve => {
+    const r = new FileReader();
+    r.onload = e => {
+      resolve(e.target.result);
+    };
+    console.log("blob2dataurl", { blob });
+    r.readAsDataURL(blob);
+  });
+}
