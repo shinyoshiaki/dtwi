@@ -45,6 +45,7 @@ class Main extends React.Component {
 
   findPicture = url => {
     const { p2p } = this.props;
+    console.log("findpicture", { url });
     return new Promise((resolve, reject) => {
       find(p2p.kad);
       async function find(kad = new Kademlia()) {

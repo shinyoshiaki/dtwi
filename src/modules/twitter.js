@@ -87,6 +87,7 @@ export function tweet(
   if (opt.picture) kad.storeChunks(kad.nodeId, pictureAddress, opt.picture);
   setValue(Istate.lastTweet, tweet, dispatch);
   pushArray(Istate.myTweets, tweet, dispatch);
+  getTimeline(kad, dispatch);
 }
 
 export function follow(id, dispatch) {
