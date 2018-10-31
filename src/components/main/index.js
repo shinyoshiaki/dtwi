@@ -8,11 +8,22 @@ export const { Provider, Consumer } = Context;
 
 export class MainContext extends Component {
   render() {
-    const { excuteTweet, kbuckets, reload, setFile, findPicture } = this.props;
+    const {
+      excuteTweet,
+      kbuckets,
+      reload,
+      setFile,
+      findPicture,
+      nodeId
+    } = this.props;
     console.log("main index", this.props);
     return (
       <Provider value={{ excuteTweet, reload, setFile, findPicture }}>
-        {header(["one", "two"], [<MainTimeLine />, createNodeList(kbuckets)])}
+        {header(
+          ["one", "two"],
+          [<MainTimeLine />, createNodeList(kbuckets)],
+          nodeId
+        )}
       </Provider>
     );
   }
@@ -23,7 +34,8 @@ export default function setMainContext(
   kbuckets,
   reload,
   setFile,
-  findPicture
+  findPicture,
+  nodeId
 ) {
   return (
     <MainContext
@@ -32,6 +44,7 @@ export default function setMainContext(
       reload={reload}
       setFile={setFile}
       findPicture={findPicture}
+      nodeId={nodeId}
     />
   );
 }

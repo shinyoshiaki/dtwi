@@ -41,40 +41,11 @@ class Main extends React.Component {
   setFile = chunks => {
     const { dispatch } = this.props;
     setValue(Istate.selectFile, chunks, dispatch);
-  };
-
-  findPicture = url => {
-    const { p2p } = this.props;
-    console.log("findpicture", { url });
-    return new Promise((resolve, reject) => {
-      find(p2p.kad);
-      async function find(kad = new Kademlia()) {
-        if (Object.keys(kad.keyValueList).includes(url)) {
-          console.log("fownd picture", kad.keyValueList[url]);
-          try {
-            resolve(
-              window.URL.createObjectURL(new Blob(kad.keyValueList[url].chunks))
-            );
-          } catch (error) {
-            reject("findpicture blob error", { error });
-          }
-        } else {
-          console.log("findpicture findvalue");
-          const result = await kad.findValue(url).catch(console.log);
-          if (!result) reject("file not fownd");
-          try {
-            console.log("findpicture findvalue", { result });
-
-            resolve(window.URL.createObjectURL(new Blob(result.chunks)));
-          } catch (error) {
-            reject("findpicture blob error", { error }, { result });
-          }
-        }
-      }
-    });
-  };
+  };  
 
   render() {
+    const { p2p } = this.props;
+    console.log("main", { p2p });
     return (
       <div>
         {setMainContext(
@@ -82,7 +53,8 @@ class Main extends React.Component {
           this.state.kbuckets,
           {},
           this.setFile,
-          this.findPicture
+          this.findPicture,
+          p2p.kad.nodeId
         )}
       </div>
     );

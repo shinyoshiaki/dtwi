@@ -3067,6 +3067,14 @@ buffer@^4.3.0:
     ieee754 "^1.1.4"
     isarray "^1.0.0"
 
+buffer@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.2.1.tgz#dd57fa0f109ac59c602479044dca7b8b3d0b71d6"
+  integrity sha512-c+Ko0loDaFfuPWiL02ls9Xd3GO3cPVmUobQ6t3rXNUk304u6hGq+8N/kFi+QEIKhzK3uwolVhLzszmfLmMLnqg==
+  dependencies:
+    base64-js "^1.0.2"
+    ieee754 "^1.1.4"
+
 buffers@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/buffers/-/buffers-0.1.1.tgz#b24579c3bed4d6d396aeee6d9a8ae7f5482ab7bb"
@@ -7571,14 +7579,16 @@ jsx-ast-utils@^2.0.1:
     sha1 "^1.1.1"
 
 "kad-rtc@git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#dtwi":
-  version "0.0.14"
-  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#bf80fa984c43232f68077115d06a138314700283"
+  version "0.0.17"
+  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#76e7570ba98b57aa7d4885c2d85f911d0465ee95"
   dependencies:
     bson "^3.0.2"
+    buffer "^5.2.1"
     buffer-to-arraybuffer "^0.0.5"
     events "^3.0.0"
     inquirer "^6.2.0"
     kad-distance "git+https://git@github.com/shinyoshiaki/kad-distance.git"
+    keypair "^1.0.1"
     sha1 "^1.1.1"
     socket.io "^2.1.1"
     socket.io-client "^2.1.1"
@@ -7590,6 +7600,11 @@ keycode@^2.1.9, keycode@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
   integrity sha1-PQr1bce4uOXLqNCpfxByBO7CKwQ=
+
+keypair@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/keypair/-/keypair-1.0.1.tgz#7603719270afb6564ed38a22087a06fc9aa4ea1b"
+  integrity sha1-dgNxknCvtlZO04oiCHoG/Jqk6hs=
 
 killable@^1.0.0:
   version "1.0.1"

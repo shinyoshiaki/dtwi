@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setTimeline } from "../../components/timelline";
 import { setValue, Istate as condition } from "../../modules/condition";
 import { withRouter } from "react-router";
+import { findPicture } from "../../modules/twitter";
 
 class MainTimeLine extends Component {
   onClickId = id => {
@@ -12,7 +13,7 @@ class MainTimeLine extends Component {
   };
 
   render() {
-    const { twitter } = this.props;
+    const { twitter, p2p } = this.props;
     console.log("timeline container render", { twitter });
     return (
       <div
@@ -26,7 +27,12 @@ class MainTimeLine extends Component {
         {() => {
           console.log("timeline test", twitter.timeline);
         }}
-        {setTimeline(twitter.timeline, { onClickId: this.onClickId })}
+        {setTimeline(
+          twitter.timeline,
+          { onClickId: this.onClickId },
+          findPicture,
+          p2p
+        )}
       </div>
     );
   }
@@ -34,7 +40,8 @@ class MainTimeLine extends Component {
 
 const mapStateToProps = state => {
   return {
-    twitter: state.twitter
+    twitter: state.twitter,
+    p2p: state.p2p
   };
 };
 

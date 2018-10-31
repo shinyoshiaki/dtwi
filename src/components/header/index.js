@@ -14,7 +14,7 @@ class Header extends React.Component {
   };
 
   render() {
-    const { pages, titles } = this.props;
+    const { pages, titles, nodeId } = this.props;
     const { value } = this.state;
 
     return (
@@ -31,6 +31,7 @@ class Header extends React.Component {
               })}
             </Tabs>
             <BtnReloadTimeline />
+            <div style={{ color: "black" }}> {nodeId}</div>
             <BtnAccout />
             {setBtnOpenTweet()}
           </Toolbar>
@@ -43,6 +44,6 @@ class Header extends React.Component {
   }
 }
 
-export function header(titles = [], pages = []) {
-  return <Header titles={titles} pages={pages} />;
+export function header(titles = [], pages = [], nodeId) {
+  return <Header titles={titles} pages={pages} nodeId={nodeId} />;
 }

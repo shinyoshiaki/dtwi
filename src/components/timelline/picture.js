@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Consumer } from "../main";
+import { Consumer } from ".";
 
 export class ImageTweet extends Component {
-  context;
+  findPicture;
+  p2p;
   imageUrl;
   constructor(props) {
     super(props);
@@ -18,9 +19,9 @@ export class ImageTweet extends Component {
     console.log("picture didmount", { imageUrl });
     (async () => {
       if (imageUrl) {
-        const result = await this.context
-          .findPicture(imageUrl)
-          .catch(console.log);
+        const result = await this.findPicture(imageUrl, this.p2p).catch(
+          console.log
+        );
         if (result) {
           this.setState({ imgsrc: result });
         }
@@ -36,9 +37,9 @@ export class ImageTweet extends Component {
       if (imageUrl !== this.imageUrl) {
         this.imageUrl = imageUrl;
         console.log("componentDidUpdate find");
-        const result = await this.context
-          .findPicture(imageUrl)
-          .catch(console.log);
+        const result = await this.findPicture(imageUrl, this.p2p).catch(
+          console.log
+        );
         if (result) {
           this.setState({ imgsrc: result });
         }
@@ -52,7 +53,8 @@ export class ImageTweet extends Component {
       <Consumer>
         {context => {
           context = context || {};
-          this.context = context;
+          this.findPicture = context.findPicture;
+          this.p2p = context.p2p;
           return (
             <div>
               {imageUrl}
