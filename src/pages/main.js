@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { tweet } from "../modules/twitter";
 import setMainContext from "../components/main";
 import { setValue, Istate } from "../modules/condition";
-import Kademlia from "kad-rtc";
 
 class Main extends React.Component {
+  nodeId = "";
   constructor(props) {
     super(props);
     const { p2p, history } = this.props;
@@ -17,6 +17,11 @@ class Main extends React.Component {
     if (!p2p.kad) {
       history.push("/");
     }
+  }
+
+  componentWillMount() {
+    const { p2p } = this.props;
+    this.nodeId = p2p.kad.nodeId;
   }
 
   componentDidMount() {
@@ -41,7 +46,7 @@ class Main extends React.Component {
   setFile = chunks => {
     const { dispatch } = this.props;
     setValue(Istate.selectFile, chunks, dispatch);
-  };  
+  };
 
   render() {
     const { p2p } = this.props;
@@ -54,7 +59,7 @@ class Main extends React.Component {
           {},
           this.setFile,
           this.findPicture,
-          p2p.kad.nodeId
+          this.nodeId
         )}
       </div>
     );

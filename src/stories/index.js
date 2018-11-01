@@ -8,7 +8,7 @@ import { FormTweet } from "../components/header/formTweet";
 import BtnPicFile from "../components/header/btnPicFile";
 import FormBadge from "../components/user/badge";
 import setUserContext from "../components/user";
-import SignIn from "../components/login";
+import setSignin from "../components/login";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -72,4 +72,8 @@ storiesOf("user", module)
     return setUserContext();
   });
 
-storiesOf("login", module).add("index", () => <SignIn />);
+storiesOf("login", module).add("index", () => {
+  return setSignin((pub, sec) => {
+    console.log({ pub }, { sec });
+  });
+});

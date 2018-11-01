@@ -47,8 +47,10 @@ const styles = theme => ({
 });
 
 class SignIn extends Component {
+  pubKey;
+  secKey;
   render() {
-    const { classes } = this.props;
+    const { classes, login, register } = this.props;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -62,8 +64,11 @@ class SignIn extends Component {
             </Typography>
             <form className={classes.form}>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="email">Public Key</InputLabel>
-                <Input id="email" name="email" autoFocus />
+                <InputLabel>Public Key</InputLabel>
+                <Input
+                  autoFocus
+                  onChange={e => (this.pubKey = e.target.value)}
+                />
               </FormControl>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel htmlFor="password">Secret Key</InputLabel>
@@ -72,6 +77,7 @@ class SignIn extends Component {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={e => (this.secKey = e.target.value)}
                 />
               </FormControl>
               <FormControlLabel
@@ -79,17 +85,19 @@ class SignIn extends Component {
                 label="Remember me"
               />
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={() => {
+                  login(this.pubKey, this.secKey);
+                }}
               >
                 Sign in
               </Button>
               <br />
               <br />
-              <Button fullWidth variant="contained">
+              <Button fullWidth variant="contained" onClick={register}>
                 register
               </Button>
             </form>
@@ -104,4 +112,7 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignIn);
+export default function setSignin(login = () => {}, register = () => {}) {
+  const Styled = withStyles(styles)(SignIn);
+  return <Styled login={login} register={register} />;
+}

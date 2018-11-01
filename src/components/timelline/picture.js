@@ -53,7 +53,7 @@ export class ImageTweet extends Component {
       <Consumer>
         {context => {
           context = context || {};
-          this.findPicture = context.findPicture;
+          this.findPicture = context.func.findPicture;
           this.p2p = context.p2p;
           return (
             <div>

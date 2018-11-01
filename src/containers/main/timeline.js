@@ -27,12 +27,10 @@ class MainTimeLine extends Component {
         {() => {
           console.log("timeline test", twitter.timeline);
         }}
-        {setTimeline(
-          twitter.timeline,
-          { onClickId: this.onClickId },
-          findPicture,
-          p2p
-        )}
+        {setTimeline(twitter.timeline, p2p, {
+          onClickId: this.onClickId,
+          findPicture
+        })}
       </div>
     );
   }
