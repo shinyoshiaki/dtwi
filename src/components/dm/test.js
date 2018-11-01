@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./dm.css";
+import "react-chat-elements/dist/main.css";
 import {
   MessageBox,
   ChatItem,

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setTimeline } from "../../components/timelline";
 import { setValue, Istate as condition } from "../../modules/condition";
 import { withRouter } from "react-router";
+import { initialState, findTweet } from "../../modules/twitter";
 
 class MainTimeLine extends Component {
   onClickId = id => {
@@ -14,6 +15,16 @@ class MainTimeLine extends Component {
       history.push("/account");
     }
   };
+
+  componentDidMount() {
+    const { twitter, p2p, dispatch } = this.props;
+    follows(twitter, p2p);
+    function follows(twitter = initialState, p2p) {
+      twitter.followIds.forEach(async id => {
+        await findTweet(id, p2p.kad, dispatch);
+      });
+    }
+  }
 
   render() {
     const { twitter, p2p } = this.props;

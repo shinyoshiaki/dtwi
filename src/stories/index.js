@@ -10,6 +10,7 @@ import FormBadge from "../components/user/badge";
 import setUserContext from "../components/user";
 import setSignin from "../components/login";
 import ChatTest from "../components/dm/test";
+import "./dm.css";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))

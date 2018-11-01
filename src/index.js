@@ -18,7 +18,7 @@ render(
       <div>
         <Route exact path="/" component={Login} />
         <Route path="/main" component={WatchLive} />
-        <Route path="/accout" component={Account} />
+        <Route path="/account" component={Account} />
         <Route path="/user" component={User} />
         <Route path="/dm" component={DM} />
       </div>

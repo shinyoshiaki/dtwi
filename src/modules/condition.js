@@ -1,11 +1,13 @@
 export const initialState = {
   findUser: undefined,
-  selectFile: undefined
+  selectFile: undefined,
+  dmUserId: undefined
 };
 
 export const Istate = {
   findUser: "findUser",
-  selectFile: "selectFile"
+  selectFile: "selectFile",
+  dmUserId: "dmUserId"
 };
 
 export const actionType = {

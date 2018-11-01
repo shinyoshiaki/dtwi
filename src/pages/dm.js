@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import setAccountContext from "../components/account";
+import { initialState } from "../modules/condition";
 
 class DM extends Component {
   constructor(props) {
@@ -11,21 +11,21 @@ class DM extends Component {
     }
   }
 
-  toMain = () => {
-    const { history } = this.props;
-    if (history) history.push("/main");
-  };
+  renderId(condition = initialState) {
+    return <div>{condition.dmUserId}</div>;
+  }
 
   render() {
-    const { twitter } = this.props;
-    return <div>{setAccountContext(twitter, this.toMain)}</div>;
+    const { condition } = this.props;
+    return <div>{this.renderId(condition)}</div>;
   }
 }
 
 const mapStateToProps = state => {
   return {
     p2p: state.p2p,
-    twitter: state.twitter
+    twitter: state.twitter,
+    condition: state.condition
   };
 };
 

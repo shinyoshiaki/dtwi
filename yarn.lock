@@ -7584,8 +7584,8 @@ jsx-ast-utils@^2.0.1:
     sha1 "^1.1.1"
 
 "kad-rtc@git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#dtwi":
-  version "0.0.19"
-  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#c3445022cfd124af0e2130a9ec000efeaec23c53"
+  version "0.0.20"
+  resolved "git+ssh://git@bitbucket.org/shinyoshiaki/kad-rtc.git#5a1e7c75228a68d4be826d5d8184564444b7e212"
   dependencies:
     bson "^3.0.2"
     buffer "^5.2.1"

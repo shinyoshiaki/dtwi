@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { findTweet, initialState, follow } from "../modules/twitter";
 import setUserContext from "../components/user";
+import { setValue, Istate } from "../modules/condition";
 
 class User extends Component {
   constructor(props) {
@@ -20,6 +21,12 @@ class User extends Component {
   toMain = () => {
     const { history } = this.props;
     if (history) history.push("/main");
+  };
+
+  toDm = id => {
+    const { history, dispatch } = this.props;
+    setValue(Istate.dmUserId, id, dispatch);
+    if (history) history.push("/dm");
   };
 
   getTargetTweets(target, state = initialState) {
@@ -44,11 +51,8 @@ class User extends Component {
     return (
       <div>
         {setUserContext(
-          tweets,
-          this.toMain,
-          this.follow,
-          condition.findUser,
-          p2p
+          { timeline: tweets, id: condition.findUser, p2p },
+          { toMain: this.toMain, follow: this.follow, toDm: this.toDm }
         )}
       </div>
     );
