@@ -10,7 +10,7 @@ import FormBadge from "../components/user/badge";
 import setUserContext from "../components/user";
 import setSignin from "../components/login";
 import ChatTest from "../components/dm/test";
-import "./dm.css";
+import { FormDmChat } from "../components/dm/chat";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -91,4 +91,6 @@ storiesOf("login", module).add("index", () => {
   });
 });
 
-storiesOf("dm", module).add("chattest", () => <ChatTest />);
+storiesOf("dm", module)
+  .add("chattest", () => <ChatTest />)
+  .add("chat", () => <FormDmChat />);

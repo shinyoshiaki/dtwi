@@ -5,14 +5,15 @@ import setImageTweet from "./picture";
 import { Consumer } from ".";
 
 export class Tweet extends Component {
-  onClickId;
+  onClickId = () => {};
   render() {
     const { tweet, index } = this.props;
     return (
       <Consumer>
         {context => {
-          context = context || {};
-          this.onClickId = context.func.onClickId;
+          if (context) {
+            this.onClickId = context.func.onClickId;
+          }
           return (
             <div
               style={{

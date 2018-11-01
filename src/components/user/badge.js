@@ -18,10 +18,11 @@ export default class FormBadge extends Component {
     return (
       <Consumer>
         {context => {
-          context = context || {};
-          this.userId = context.value.id;
-          this.toDm = context.func.toDm;
-          this.follow = context.func.follow;
+          if (context) {
+            this.userId = context.value.id;
+            this.toDm = context.func.toDm;
+            this.follow = context.func.follow;
+          }
 
           return (
             <div>
