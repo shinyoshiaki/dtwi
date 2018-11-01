@@ -46,11 +46,53 @@ export class FormDmChat extends Component {
   sendComment = () => {};
   text = "";
   selectFile;
+  selectFilename;
+  dataSource;
 
   render() {
     const { value, func } = this.props;
-    if (value && func) {      
+    if (value && func) {
       this.sendComment = func.sendComment;
+      const messageArr = value.messages[value.nodeId];
+      if (messageArr)
+        this.dataSource = messageArr.map(message => {
+          console.log({ messagefile: new Blob(message.file) });
+          const position = message.type === "me" ? "right" : "left";
+          if (message.text) {
+            const text = message.text;
+            return {
+              position,
+              type: "text",
+              text,
+              date: new Date()
+            };
+          } else {
+            const text = "file";
+            const data = {
+              uri: window.URL.createObjectURL(new Blob(message.file)),
+              blob: new Blob(message.file),
+              status: {
+                click: true,
+                loading: 1
+              },
+              size: `${new Blob(message.file).size / 1000}kb`,
+              width: 300,
+              height: 300
+            };
+            return {
+              position,
+              type: "file",
+              filename: message.filename,
+              status: "send",
+              text,
+              data,
+              onDownload: () => {
+                console.log("ondownload");
+              },
+              date: new Date()
+            };
+          }
+        });
     }
     return (
       <div
@@ -60,7 +102,20 @@ export class FormDmChat extends Component {
           className="message-list"
           lockable={true}
           toBottomHeight={"100%"}
-          dataSource={this.state.messageList}
+          dataSource={this.dataSource}
+          onClick={object => {
+            console.log({ object });
+            if (object.type === "file") {
+              //window.open(object.data.uri);
+              const templink = document.createElement("a");
+              templink.href = object.data.uri;
+              templink.download = object.filename;
+              templink.style.display = "none";
+              document.body.appendChild(templink);
+              templink.click();
+              document.body.removeChild(templink);
+            }
+          }}
         />
         <div style={{ width: "100%", marginTop: "auto" }}>
           <TextField
@@ -74,12 +129,18 @@ export class FormDmChat extends Component {
           />
           <br />
           <div style={{ float: "right" }}>
-            {setBtnPicFile(file => {
+            {setBtnPicFile((file, filename) => {
+              console.log("chat pic", filename);
               this.selectFile = file;
+              this.selectFilename = filename;
             })}
             <Button
               onClick={() => {
-                this.sendComment({ text: this.text, file: this.selectFile });
+                this.sendComment({
+                  text: this.text,
+                  file: this.selectFile,
+                  filename: this.selectFilename
+                });
               }}
             >
               comment
@@ -92,7 +153,7 @@ export class FormDmChat extends Component {
 }
 
 export default function setFormDmChat(
-  value = {},
+  value = { messages: {}, nodeId: "" },
   func = { sendComment: () => {} }
 ) {
   return <FormDmChat value={value} func={func} />;

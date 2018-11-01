@@ -7,10 +7,11 @@ export class BtnPicFile extends Component {
     const { set } = this.props;
 
     const blob = e.target.files[0];
+    if (!blob) return;
     const result = await getSliceArrayBuffer(blob).catch(console.log);
     if (!result) return;
     console.log("btn pic file", { result });
-    set(result);
+    if (set) set(result, blob.name);
   };
   render() {
     return (

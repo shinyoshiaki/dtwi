@@ -115,6 +115,12 @@ export class ChatTest extends Component {
           onLoad: () => {
             console.log("Photo loaded");
           },
+          onDownload: () => {
+            console.log("ondownload");
+          },
+          onClick: () => {
+            console.log("onclick");
+          },
           status: status,
           date: new Date(),
           dateString: moment(new Date()).format("HH:mm"),
@@ -131,6 +137,9 @@ export class ChatTest extends Component {
           date: new Date(),
           subtitle: loremIpsum({ count: 1, units: "sentences" }),
           unread: parseInt((Math.random() * 10) % 3),
+          onClick: () => {
+            console.log("onclick");
+          },
           dropdownMenu: (
             <Dropdown
               animationPosition="norteast"
@@ -232,6 +241,9 @@ export class ChatTest extends Component {
             lockable={true}
             downButtonBadge={10}
             dataSource={this.state.messageList}
+            onClick={object => {
+              console.log("onclick", { object });
+            }}
           />
 
           <Input

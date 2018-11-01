@@ -19,17 +19,22 @@ class DM extends Component {
 
   sendComment = payload => {
     const { condition, p2p, dispatch } = this.props;
+    console.log("sendcomment", { payload });
     sendComment(condition.dmUserId, payload.text, p2p.kad, dispatch, {
-      file: payload.file
+      file: payload.file,
+      filename: payload.filename
     });
   };
 
   render() {
-    const { condition } = this.props;
+    const { condition, dm } = this.props;
     return (
       <div>
         {this.renderId(condition)}
-        {setFormDmChat({}, { sendComment: this.sendComment })}
+        {setFormDmChat(
+          { messages: dm.messages, nodeId: condition.dmUserId },
+          { sendComment: this.sendComment }
+        )}
       </div>
     );
   }
@@ -39,7 +44,8 @@ const mapStateToProps = state => {
   return {
     p2p: state.p2p,
     twitter: state.twitter,
-    condition: state.condition
+    condition: state.condition,
+    dm: state.dm
   };
 };
 
