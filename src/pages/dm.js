@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { initialState } from "../modules/condition";
+import setFormDmChat from "../components/dm/chat";
+import { sendComment } from "../modules/dm";
 
 class DM extends Component {
   constructor(props) {
@@ -15,9 +17,21 @@ class DM extends Component {
     return <div>{condition.dmUserId}</div>;
   }
 
+  sendComment = payload => {
+    const { condition, p2p, dispatch } = this.props;
+    sendComment(condition.dmUserId, payload.text, p2p.kad, dispatch, {
+      file: payload.file
+    });
+  };
+
   render() {
     const { condition } = this.props;
-    return <div>{this.renderId(condition)}</div>;
+    return (
+      <div>
+        {this.renderId(condition)}
+        {setFormDmChat({}, { sendComment: this.sendComment })}
+      </div>
+    );
   }
 }
 

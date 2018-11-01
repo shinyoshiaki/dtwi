@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setValue, Istate } from "../modules/p2p";
 import Node from "kad-rtc/lib/node/node";
 import { event } from "../modules/twitter";
+import { event as dmEvent } from "../modules/dm";
 import setSignin from "../components/login";
 
 class Login extends React.Component {
@@ -23,6 +24,7 @@ class Login extends React.Component {
     setValue(Istate.kad, node.kad, dispatch);
 
     event(node.kad, dispatch);
+    dmEvent(node.kad, dispatch);
 
     this.props.history.push("/main");
   };

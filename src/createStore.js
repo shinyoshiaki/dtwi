@@ -11,6 +11,7 @@ import { routerReducer, routerMiddleware } from "react-router-redux";
 import p2pReducer from "./modules/p2p";
 import twitter from "./modules/twitter";
 import condition from "./modules/condition";
+import dm from "./modules/dm";
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
@@ -21,7 +22,8 @@ export default function createStore() {
       p2p: p2pReducer,
       router: routerReducer,
       twitter,
-      condition
+      condition,
+      dm
     }),
     applyMiddleware(thunk, logger, middleware)
   );

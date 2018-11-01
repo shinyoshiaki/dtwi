@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { TextField, Button } from "@material-ui/core";
+import setBtnPicFile, { BtnPicFile } from "../header/btnPicFile";
 const loremIpsum = require("lorem-ipsum");
 const moment = require("moment");
 const Identicon = require("identicon.js");
@@ -42,7 +43,15 @@ export class FormDmChat extends Component {
     }).toString();
   }
 
+  sendComment = () => {};
+  text = "";
+  selectFile;
+
   render() {
+    const { value, func } = this.props;
+    if (value && func) {      
+      this.sendComment = func.sendComment;
+    }
     return (
       <div
         style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
@@ -60,15 +69,31 @@ export class FormDmChat extends Component {
             margin="normal"
             variant="outlined"
             rows="3"
+            onChange={e => (this.text = e.target.value)}
             style={{ width: "100%" }}
           />
           <br />
           <div style={{ float: "right" }}>
-            <Button>file</Button>
-            <Button>comment</Button>
+            {setBtnPicFile(file => {
+              this.selectFile = file;
+            })}
+            <Button
+              onClick={() => {
+                this.sendComment({ text: this.text, file: this.selectFile });
+              }}
+            >
+              comment
+            </Button>
           </div>
         </div>
       </div>
     );
   }
+}
+
+export default function setFormDmChat(
+  value = {},
+  func = { sendComment: () => {} }
+) {
+  return <FormDmChat value={value} func={func} />;
 }

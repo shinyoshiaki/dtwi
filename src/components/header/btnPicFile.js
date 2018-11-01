@@ -31,6 +31,6 @@ export class BtnPicFile extends Component {
   }
 }
 
-export default function setBtnPicFile(set) {
+export default function setBtnPicFile(set = () => {}) {
   return <BtnPicFile set={set} />;
 }
