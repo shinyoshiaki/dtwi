@@ -1,8 +1,39 @@
 import React, { Component } from "react";
 import { Consumer } from ".";
+import Kademlia from "kad-rtc";
+
+const findPicture = (url, p2p) => {
+  if (!p2p.kad) return;
+  console.log("findpicture", { url });
+  return new Promise((resolve, reject) => {
+    find(p2p.kad);
+    async function find(kad = new Kademlia()) {
+      if (Object.keys(kad.keyValueList).includes(url)) {
+        console.log("fownd picture", kad.keyValueList[url]);
+        try {
+          resolve(
+            window.URL.createObjectURL(new Blob(kad.keyValueList[url].chunks))
+          );
+        } catch (error) {
+          reject("findpicture blob error", { error });
+        }
+      } else {
+        console.log("findpicture findvalue");
+        const result = await kad.findValue(url).catch(console.log);
+        if (!result) reject("file not fownd");
+        try {
+          console.log("findpicture findvalue", { result });
+
+          resolve(window.URL.createObjectURL(new Blob(result.chunks)));
+        } catch (error) {
+          reject("findpicture blob error", { error }, { result });
+        }
+      }
+    }
+  });
+};
 
 export class ImageTweet extends Component {
-  findPicture;
   p2p;
   imageUrl;
   constructor(props) {
@@ -19,9 +50,7 @@ export class ImageTweet extends Component {
     console.log("picture didmount", { imageUrl });
     (async () => {
       if (imageUrl) {
-        const result = await this.findPicture(imageUrl, this.p2p).catch(
-          console.log
-        );
+        const result = await findPicture(imageUrl, this.p2p).catch(console.log);
         if (result) {
           this.setState({ imgsrc: result });
         }
@@ -37,9 +66,7 @@ export class ImageTweet extends Component {
       if (imageUrl !== this.imageUrl) {
         this.imageUrl = imageUrl;
         console.log("componentDidUpdate find");
-        const result = await this.findPicture(imageUrl, this.p2p).catch(
-          console.log
-        );
+        const result = await findPicture(imageUrl, this.p2p).catch(console.log);
         if (result) {
           this.setState({ imgsrc: result });
         }
@@ -53,12 +80,11 @@ export class ImageTweet extends Component {
       <Consumer>
         {context => {
           context = context || {};
-          this.findPicture = context.func.findPicture;
           this.p2p = context.p2p;
           return (
             <div>
               {imageUrl}
-              <img src={this.state.imgsrc} alt={imageUrl} />
+              <img src={this.state.imgsrc} alt={imageUrl} width="70%" />
             </div>
           );
         }}

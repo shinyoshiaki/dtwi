@@ -44,7 +44,7 @@ export class Tweet extends Component {
               <div style={{ marginLeft: 50 }}>
                 {tweet.msg}
                 <br />
-                {setImageTweet(tweet.pic)}
+                {tweet.pic ? setImageTweet(tweet.pic) : undefined}
               </div>
               <br />
               <Button>name</Button>

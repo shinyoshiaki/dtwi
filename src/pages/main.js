@@ -21,7 +21,7 @@ class Main extends React.Component {
 
   componentWillMount() {
     const { p2p } = this.props;
-    this.nodeId = p2p.kad.nodeId;
+    if (p2p.kad) this.nodeId = p2p.kad.nodeId;
   }
 
   componentDidMount() {

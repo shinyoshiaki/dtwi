@@ -90,36 +90,6 @@ export function tweet(
   getTimeline(kad, dispatch);
 }
 
-export const findPicture = (url, p2p) => {
-  console.log("findpicture", { url });
-  return new Promise((resolve, reject) => {
-    find(p2p.kad);
-    async function find(kad = new Kademlia()) {
-      if (Object.keys(kad.keyValueList).includes(url)) {
-        console.log("fownd picture", kad.keyValueList[url]);
-        try {
-          resolve(
-            window.URL.createObjectURL(new Blob(kad.keyValueList[url].chunks))
-          );
-        } catch (error) {
-          reject("findpicture blob error", { error });
-        }
-      } else {
-        console.log("findpicture findvalue");
-        const result = await kad.findValue(url).catch(console.log);
-        if (!result) reject("file not fownd");
-        try {
-          console.log("findpicture findvalue", { result });
-
-          resolve(window.URL.createObjectURL(new Blob(result.chunks)));
-        } catch (error) {
-          reject("findpicture blob error", { error }, { result });
-        }
-      }
-    }
-  });
-};
-
 export function follow(id, dispatch) {
   dispatch({ type: actionType.FOLLOW, data: id });
 }

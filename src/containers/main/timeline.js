@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import { setTimeline } from "../../components/timelline";
 import { setValue, Istate as condition } from "../../modules/condition";
 import { withRouter } from "react-router";
-import { findPicture } from "../../modules/twitter";
 
 class MainTimeLine extends Component {
   onClickId = id => {
-    const { dispatch, history } = this.props;
-    setValue(condition.findUser, id, dispatch);
-    history.push("/user");
+    const { dispatch, history, p2p } = this.props;
+    if (id !== p2p.kad.nodeId) {
+      setValue(condition.findUser, id, dispatch);
+      history.push("/user");
+    } else {
+      history.push("/account");
+    }
   };
 
   render() {
@@ -28,8 +31,7 @@ class MainTimeLine extends Component {
           console.log("timeline test", twitter.timeline);
         }}
         {setTimeline(twitter.timeline, p2p, {
-          onClickId: this.onClickId,
-          findPicture
+          onClickId: this.onClickId
         })}
       </div>
     );

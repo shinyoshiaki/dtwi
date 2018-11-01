@@ -9,6 +9,7 @@ import BtnPicFile from "../components/header/btnPicFile";
 import FormBadge from "../components/user/badge";
 import setUserContext from "../components/user";
 import setSignin from "../components/login";
+import ChatTest from "../components/dm/test";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -69,7 +70,18 @@ storiesOf("Timeline", module)
 storiesOf("user", module)
   .add("badge", () => <FormBadge />)
   .add("index", () => {
-    return setUserContext();
+    return setUserContext([
+      {
+        id: "1",
+        time: "0000",
+        msg: "hello"
+      },
+      {
+        id: "2",
+        time: "0000",
+        msg: "hellow"
+      }
+    ]);
   });
 
 storiesOf("login", module).add("index", () => {
@@ -77,3 +89,5 @@ storiesOf("login", module).add("index", () => {
     console.log({ pub }, { sec });
   });
 });
+
+storiesOf("dm", module).add("chattest", () => <ChatTest />);

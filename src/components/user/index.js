@@ -9,21 +9,31 @@ export const { Provider, Consumer } = Context;
 
 export class UserContext extends Component {
   render() {
-    const { timeline, toMain, follow, id } = this.props;
+    const { timeline, toMain, follow, id, p2p } = this.props;
     return (
       <Provider value={{ follow, id }}>
         <IconButton onClick={toMain} style={{ marginLeft: "auto" }}>
           <ArrowBack />
         </IconButton>
-        <FormBadge />
-        {setTimeline(timeline)}
+        <div style={{ display: "flex" }}>
+          <div style={{ width: 300 }}>
+            <FormBadge />
+          </div>
+          <div style={{ flex: 1 }}>{setTimeline(timeline, p2p)}</div>
+        </div>
       </Provider>
     );
   }
 }
 
-export default function setUserContext(timeline, toMain, follow, id) {
+export default function setUserContext(timeline=[], toMain, follow, id, p2p) {
   return (
-    <UserContext timeline={timeline} toMain={toMain} follow={follow} id={id} />
+    <UserContext
+      timeline={timeline}
+      toMain={toMain}
+      follow={follow}
+      id={id}
+      p2p={p2p}
+    />
   );
 }

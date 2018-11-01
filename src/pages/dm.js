@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import setAccountContext from "../components/account";
 
-class Account extends Component {
+class DM extends Component {
   constructor(props) {
     super(props);
     const { p2p, history } = this.props;
@@ -29,4 +29,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Account);
+export default connect(mapStateToProps)(DM);

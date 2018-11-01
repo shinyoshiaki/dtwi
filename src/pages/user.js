@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { IconButton } from "@material-ui/core";
-import { ArrowBack } from "@material-ui/icons";
-import { Istate, findTweet, initialState, follow } from "../modules/twitter";
-import { setTimeline } from "../components/timelline";
+import { findTweet, initialState, follow } from "../modules/twitter";
 import setUserContext from "../components/user";
 
 class User extends Component {
@@ -41,12 +38,18 @@ class User extends Component {
   };
 
   render() {
-    const { twitter, condition } = this.props;
+    const { twitter, condition, p2p } = this.props;
     const tweets = this.getTargetTweets(condition.findUser, twitter);
 
     return (
       <div>
-        {setUserContext(tweets, this.toMain, this.follow, condition.findUser)}
+        {setUserContext(
+          tweets,
+          this.toMain,
+          this.follow,
+          condition.findUser,
+          p2p
+        )}
       </div>
     );
   }

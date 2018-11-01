@@ -12,13 +12,12 @@ export class MainContext extends Component {
       excuteTweet,
       kbuckets,
       reload,
-      setFile,
-      findPicture,
+      setFile,      
       nodeId
     } = this.props;
     console.log("main index", this.props);
     return (
-      <Provider value={{ excuteTweet, reload, setFile, findPicture }}>
+      <Provider value={{ excuteTweet, reload, setFile }}>
         {header(
           ["one", "two"],
           [<MainTimeLine />, createNodeList(kbuckets)],
@@ -33,8 +32,7 @@ export default function setMainContext(
   excuteTweet,
   kbuckets,
   reload,
-  setFile,
-  findPicture,
+  setFile,  
   nodeId
 ) {
   return (
@@ -42,8 +40,7 @@ export default function setMainContext(
       excuteTweet={excuteTweet}
       kbuckets={kbuckets}
       reload={reload}
-      setFile={setFile}
-      findPicture={findPicture}
+      setFile={setFile}      
       nodeId={nodeId}
     />
   );

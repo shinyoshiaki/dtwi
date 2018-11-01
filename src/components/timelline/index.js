@@ -24,16 +24,9 @@ export function setTimeline(
   timeline = [],
   p2p,
   func = {
-    onClickId: () => {},
-    findPicture: () => {}
+    onClickId: () => {}
   }
 ) {
   console.log("settimeline", { timeline });
-  return (
-    <Timeline
-      timeline={timeline}
-      p2p={p2p}
-      func={func}            
-    />
-  );
+  return <Timeline timeline={timeline} p2p={p2p} func={func} />;
 }

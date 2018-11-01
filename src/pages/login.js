@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, TextField, Typography } from "@material-ui/core";
 import { setValue, Istate } from "../modules/p2p";
 import Node from "kad-rtc/lib/node/node";
 import { event } from "../modules/twitter";
