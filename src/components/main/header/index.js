@@ -37,20 +37,29 @@ class Header extends React.Component {
               onChange={this.handleChange}
               style={{ color: "black" }}
             >
-              {this.titles.map((v, i) => {
-                return <Tab label={v} key={i} />;
-              })}
+              {this.titles
+                ? this.titles.map((v, i) => {
+                    return <Tab label={v} key={i} />;
+                  })
+                : undefined}
             </Tabs>
+            {"　"}
             <BtnReloadTimeline />
+            {"　"}
             <div style={{ color: "black" }}> {this.nodeId}</div>
+            {"　"}
             <FormSearchUser />
+            {"　"}
             <BtnAccount />
+            {"　"}
             {setBtnOpenTweet()}
           </Toolbar>
         </AppBar>
-        {this.pages.map((v, i) => {
-          return tab === i && v;
-        })}
+        {this.pages
+          ? this.pages.map((v, i) => {
+              return tab === i && v;
+            })
+          : undefined}
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import Kademlia from "kad-rtc";
+import { setConditionValue, Icondition } from "./condition";
 
 export const initialState = {
   messages: {}
@@ -24,6 +25,12 @@ export function event(kad = new Kademlia(), dispatch) {
         filename: payload.filename
       };
     dispatch({ type: actionType.RECEIVE_DM, data });
+    setConditionValue(Icondition.nofiticationOpen, true, dispatch);
+    setConditionValue(
+      Icondition.nofiticationMessage,
+      `dm comming 「${payload.text}」`,
+      dispatch
+    );
   };
 }
 

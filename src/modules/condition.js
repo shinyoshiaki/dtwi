@@ -2,14 +2,18 @@ export const initialState = {
   findUser: undefined,
   selectFile: undefined,
   dmUserId: undefined,
-  loading: false
+  loading: false,
+  nofiticationOpen: false,
+  nofiticationMessage: ""
 };
 
 export const Icondition = {
   findUser: "findUser",
   selectFile: "selectFile",
   dmUserId: "dmUserId",
-  loading: "loading"
+  loading: "loading",
+  nofiticationOpen: "nofiticationOpen",
+  nofiticationMessage: "nofiticationMessage"
 };
 
 export const actionType = {

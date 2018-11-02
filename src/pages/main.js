@@ -5,6 +5,7 @@ import setMainContext from "../components/main";
 import { setConditionValue, Icondition } from "../modules/condition";
 import Kademlia from "kad-rtc";
 import { Modal, CircularProgress } from "@material-ui/core";
+import setNofitication from "../components/common/nofitication";
 
 class Main extends React.Component {
   nodeId = "";
@@ -74,6 +75,17 @@ class Main extends React.Component {
     }
   };
 
+  toAccount = () => {
+    const { history } = this.props;
+    console.log("this.props", this.props);
+    if (history) history.push("/account");
+  };
+
+  nofiticationClose = () => {
+    const { dispatch } = this.props;
+    setConditionValue(Icondition.nofiticationOpen, false, dispatch);
+  };
+
   render() {
     const { p2p, condition } = this.props;
     console.log("main", { p2p });
@@ -85,7 +97,8 @@ class Main extends React.Component {
             excuteTweet: this.excuteTweet,
             reload: {},
             setFile: this.setFile,
-            searchUser: this.searchUser
+            searchUser: this.searchUser,
+            toAccount: this.toAccount
           }
         )}
         <Modal
@@ -98,6 +111,13 @@ class Main extends React.Component {
         >
           <CircularProgress />
         </Modal>
+        {setNofitication(
+          {
+            nofiticationOpen: condition.nofiticationOpen,
+            nofiticationMessage: condition.nofiticationMessage
+          },
+          { nofiticationClose: this.nofiticationClose }
+        )}
       </div>
     );
   }

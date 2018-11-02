@@ -32,7 +32,8 @@ export default function setMainContext(
     excuteTweet: () => {},
     reload: () => {},
     setFile: () => {},
-    searchUser: () => {}
+    searchUser: () => {},
+    toAccount: () => {}
   }
 ) {
   return <MainContext val={val} func={func} />;

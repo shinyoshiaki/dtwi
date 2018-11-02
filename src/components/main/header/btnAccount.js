@@ -1,21 +1,28 @@
 import React, { Component } from "react";
 import { IconButton } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
-import { withRouter } from "react-router";
+import { Consumer } from "../index";
 
-export class BtnAccount extends Component {
-  toAccount = () => {
-    const { history } = this.props;
-    console.log("this.props", this.props);
-    if (history) history.push("/account");
-  };
+export default class BtnAccount extends Component {
   render() {
     return (
-      <IconButton onClick={this.toAccount} style={{ marginLeft: "auto" }}>
-        <AccountCircle />
-      </IconButton>
+      <Consumer>
+        {context => {
+          context = context || {
+            func: {
+              toAccount: () => {}
+            }
+          };
+          return (
+            <IconButton
+              onClick={context.func.toAccount}
+              style={{ marginLeft: "auto" }}
+            >
+              <AccountCircle />
+            </IconButton>
+          );
+        }}
+      </Consumer>
     );
   }
 }
-
-export default withRouter(BtnAccount);
