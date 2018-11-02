@@ -5,7 +5,7 @@ import { Consumer } from "../main";
 import setBtnPicFile from "./btnPicFile";
 
 export class FormTweet extends Component {
-  text;
+  state = { target: "" };
   file;
 
   handlePicFile = file => {
@@ -26,7 +26,10 @@ export class FormTweet extends Component {
                 variant="outlined"
                 rows="6"
                 style={{ width: "100%" }}
-                onChange={e => (this.text = e.target.value)}
+                value={this.state.target}
+                onChange={e => {
+                  this.setState({ target: e.target.value });
+                }}
               />
               <br />
               <div style={{ bottom: 0 }}>
@@ -36,7 +39,8 @@ export class FormTweet extends Component {
                 <Button
                   style={{ float: "right" }}
                   onClick={() => {
-                    context.excuteTweet(this.text, this.file);
+                    context.excuteTweet(this.state.target, this.file);
+                    this.setState({ target: "" });
                     closeModal();
                   }}
                 >

@@ -54,12 +54,8 @@ class Main extends React.Component {
     return (
       <div>
         {setMainContext(
-          this.excuteTweet,
-          this.state.kbuckets,
-          {},
-          this.setFile,
-          this.findPicture,
-          this.nodeId
+          { kbuckets: this.state.kbuckets, nodeId: p2p.kad.nodeId },
+          { excuteTweet: this.excuteTweet, reload: {}, setFile: this.setFile }
         )}
       </div>
     );

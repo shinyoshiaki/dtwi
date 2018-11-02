@@ -6,44 +6,53 @@ import BtnReloadTimeline from "../main/btnReloadTimeline";
 
 class Header extends React.Component {
   state = {
-    value: 0
+    tab: 0
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleChange = (event, tab) => {
+    this.setState({ tab });
   };
+
+  titles = [];
+  nodeId = "";
+  pages = [];
 
   render() {
-    const { pages, titles, nodeId } = this.props;
-    const { value } = this.state;
+    const { value } = this.props;
+    if (value) {
+      this.titles = value.titles;
+      this.pages = value.pages;
+      this.nodeId = value.nodeId;
+    }
+    const { tab } = this.state;
 
     return (
       <div style={{ flexGrow: 1 }}>
         <AppBar position="static" style={{ backgroundColor: "white" }}>
           <Toolbar>
             <Tabs
-              value={value}
+              value={tab}
               onChange={this.handleChange}
               style={{ color: "black" }}
             >
-              {titles.map((v, i) => {
+              {this.titles.map((v, i) => {
                 return <Tab label={v} key={i} />;
               })}
             </Tabs>
             <BtnReloadTimeline />
-            <div style={{ color: "black" }}> {nodeId}</div>
+            <div style={{ color: "black" }}> {this.nodeId}</div>
             <BtnAccount />
             {setBtnOpenTweet()}
           </Toolbar>
         </AppBar>
-        {pages.map((v, i) => {
-          return value === i && v;
+        {this.pages.map((v, i) => {
+          return tab === i && v;
         })}
       </div>
     );
   }
 }
 
-export function header(titles = [], pages = [], nodeId) {
-  return <Header titles={titles} pages={pages} nodeId={nodeId} />;
+export function header(value = { titles: [], pages: [], nodeId: "" }) {
+  return <Header value={value} />;
 }

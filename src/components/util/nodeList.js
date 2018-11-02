@@ -23,7 +23,7 @@ export default class NodeList extends Component {
         }
       });
     return (
-        <div style={{ margin: "20px" }}>
+      <div style={{ margin: "20px" }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -32,10 +32,10 @@ export default class NodeList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.keys(arr).map(key => {
+            {Object.keys(arr).map((key, i) => {
               const kbucket = arr[key];
               return (
-                <TableRow>
+                <TableRow key={i}>
                   <TableCell>{key}</TableCell>
                   <TableCell>{kbucket}</TableCell>
                 </TableRow>

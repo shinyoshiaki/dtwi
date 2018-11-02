@@ -12,12 +12,14 @@ import setSignin from "../components/login";
 import ChatTest from "../components/dm/test";
 import { FormDmChat } from "../components/dm/chat";
 import { setFollowList } from "../components/account/followList";
+import setFormSearchUser from "../components/header/formSearchUser";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
   .add("btnOpenTweet", () => setBtnOpenTweet(<FormTweet />))
   .add("formTweet", () => <FormTweet />)
-  .add("btnPicFile", () => <BtnPicFile />);
+  .add("btnPicFile", () => <BtnPicFile />)
+  .add("searchUser", () => setFormSearchUser());
 
 storiesOf("Timeline", module)
   .add("timeline center", () => (
