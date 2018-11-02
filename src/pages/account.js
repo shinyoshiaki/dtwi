@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import setAccountContext from "../components/account";
+import { Istate } from "../modules/twitter";
+import { Istate as condition } from "../modules/condition";
+import { setValue } from "../modules/condition";
 
 class Account extends Component {
   constructor(props) {
@@ -16,9 +19,24 @@ class Account extends Component {
     if (history) history.push("/main");
   };
 
+  onClickId = id => {
+    const { dispatch, history, p2p } = this.props;
+    if (id !== p2p.kad.nodeId) {
+      setValue(condition.findUser, id, dispatch);
+      history.push("/user");
+    }
+  };
+
   render() {
     const { twitter } = this.props;
-    return <div>{setAccountContext(twitter, this.toMain)}</div>;
+    return (
+      <div>
+        {setAccountContext(
+          { twitter: twitter, follows: twitter[Istate.followIds] },
+          { toMain: this.toMain, onClickId: this.onClickId }
+        )}
+      </div>
+    );
   }
 }
 

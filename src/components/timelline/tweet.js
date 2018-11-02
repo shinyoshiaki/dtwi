@@ -23,9 +23,9 @@ export class Tweet extends Component {
                 borderColor: "#d6d7da",
                 margin: 3
               }}
-              id={index}
+              key={index}
             >
-              <IconButton onClick={this.toAccout}>
+              <IconButton onClick={this.toAccount}>
                 <AccountCircle />
               </IconButton>
               <Button

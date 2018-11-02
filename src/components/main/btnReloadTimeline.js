@@ -4,10 +4,10 @@ import { Autorenew } from "@material-ui/icons";
 import { Consumer } from "./index";
 
 export default class BtnReloadTimeline extends Component {
-  toAccout = () => {
+  toAccount = () => {
     const { history } = this.props;
     console.log("this.props", this.props);
-    if (history) history.push("/accout");
+    if (history) history.push("/account");
   };
   render() {
     return (

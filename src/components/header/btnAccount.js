@@ -3,19 +3,19 @@ import { IconButton } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import { withRouter } from "react-router";
 
-export class BtnAccout extends Component {
-  toAccout = () => {
+export class BtnAccount extends Component {
+  toAccount = () => {
     const { history } = this.props;
     console.log("this.props", this.props);
-    if (history) history.push("/accout");
+    if (history) history.push("/account");
   };
   render() {
     return (
-      <IconButton onClick={this.toAccout} style={{ marginLeft: "auto" }}>
+      <IconButton onClick={this.toAccount} style={{ marginLeft: "auto" }}>
         <AccountCircle />
       </IconButton>
     );
   }
 }
 
-export default withRouter(BtnAccout);
+export default withRouter(BtnAccount);

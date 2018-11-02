@@ -13,7 +13,8 @@ export const initialState = {
 export const Istate = {
   myTweets: "myTweets",
   timeline: "timeline",
-  lastTweet: "lastTweet"
+  lastTweet: "lastTweet",
+  followIds: "followIds"
 };
 
 export const actionType = {

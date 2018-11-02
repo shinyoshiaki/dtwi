@@ -8,10 +8,10 @@ const moment = require("moment");
 const Identicon = require("identicon.js");
 
 export class FormDmChat extends Component {
-  toAccout = () => {
+  toAccount = () => {
     const { history } = this.props;
     console.log("this.props", this.props);
-    if (history) history.push("/accout");
+    if (history) history.push("/account");
   };
 
   state = {

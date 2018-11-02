@@ -11,6 +11,7 @@ import setUserContext from "../components/user";
 import setSignin from "../components/login";
 import ChatTest from "../components/dm/test";
 import { FormDmChat } from "../components/dm/chat";
+import { setFollowList } from "../components/account/followList";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -94,3 +95,7 @@ storiesOf("login", module).add("index", () => {
 storiesOf("dm", module)
   .add("chattest", () => <ChatTest />)
   .add("chat", () => <FormDmChat />);
+
+storiesOf("account", module).add("followlist", () => {
+  return setFollowList({ follows: ["a", "b", "c"] });
+});

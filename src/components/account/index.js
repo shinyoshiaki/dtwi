@@ -3,24 +3,40 @@ import { IconButton } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import { Istate } from "../../modules/twitter";
 import { setTimeline } from "../../components/timelline";
+import { setFollowList } from "./followList";
 
 const Context = createContext();
 export const { Provider, Consumer } = Context;
 
-export class AccoutContext extends Component {
+export class AccountContext extends Component {
+  twitter = [];
+  toMain = () => {};
+
   render() {
-    const { twitter, toMain } = this.props;
+    const { value, func } = this.props;
+    if (value && func) {
+      this.twitter = value.twitter;
+      this.toMain = func.toMain;
+    }
     return (
-      <Provider value={{}}>
-        <IconButton onClick={toMain} style={{ marginLeft: "auto" }}>
+      <div>
+        <IconButton onClick={this.toMain} style={{ marginLeft: "auto" }}>
           <ArrowBack />
         </IconButton>
-        {setTimeline(twitter[Istate.myTweets])}
-      </Provider>
+        <div style={{ display: "flex" }}>
+          <div style={{ width: 500 }}>{setFollowList(value, func)}</div>
+          <div style={{ flex: 1 }}>
+            {setTimeline(this.twitter[Istate.myTweets])}
+          </div>
+        </div>{" "}
+      </div>
     );
   }
 }
 
-export default function setAccountContext(twitter, toMain) {
-  return <AccoutContext twitter={twitter} toMain={toMain} />;
+export default function setAccountContext(
+  value = { twitter: [], follows: [] },
+  func = { toMain: () => {}, onClickId: () => {} }
+) {
+  return <AccountContext value={value} func={func} />;
 }

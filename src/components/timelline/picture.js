@@ -95,5 +95,5 @@ export class ImageTweet extends Component {
 
 export default function setImageTweet(imageUrl) {
   console.log("setpicture", { imageUrl });
-  return <ImageTweet imageUrl={imageUrl} id={imageUrl} />;
+  return <ImageTweet imageUrl={imageUrl} key={imageUrl} />;
 }

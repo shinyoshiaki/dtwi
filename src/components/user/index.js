@@ -16,7 +16,7 @@ export class UserContext extends Component {
           <ArrowBack />
         </IconButton>
         <div style={{ display: "flex" }}>
-          <div style={{ width: 300 }}>
+          <div style={{ width: 500 }}>
             <FormBadge />
           </div>
           <div style={{ flex: 1 }}>

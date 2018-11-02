@@ -8,10 +8,10 @@ export default class FormBadge extends Component {
   follow = () => {};
   userId = "";
 
-  toAccout = () => {
+  toAccount = () => {
     const { history } = this.props;
     console.log("this.props", this.props);
-    if (history) history.push("/accout");
+    if (history) history.push("/account");
   };
 
   render() {

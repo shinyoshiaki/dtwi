@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Tabs, Tab, Toolbar, Button } from "@material-ui/core";
-import BtnAccout from "./btnAccount";
+import BtnAccount from "./btnAccount";
 import setBtnOpenTweet from "./btnOpenTweet";
 import BtnReloadTimeline from "../main/btnReloadTimeline";
 
@@ -32,7 +32,7 @@ class Header extends React.Component {
             </Tabs>
             <BtnReloadTimeline />
             <div style={{ color: "black" }}> {nodeId}</div>
-            <BtnAccout />
+            <BtnAccount />
             {setBtnOpenTweet()}
           </Toolbar>
         </AppBar>
