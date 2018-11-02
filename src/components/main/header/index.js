@@ -4,6 +4,7 @@ import BtnAccount from "./btnAccount";
 import setBtnOpenTweet from "./btnOpenTweet";
 import BtnReloadTimeline from "../btnReloadTimeline";
 import setFormSearchUser from "./formSearchUser";
+import FormSearchUser from "./formSearchUser";
 
 class Header extends React.Component {
   state = {
@@ -42,7 +43,7 @@ class Header extends React.Component {
             </Tabs>
             <BtnReloadTimeline />
             <div style={{ color: "black" }}> {this.nodeId}</div>
-            {setFormSearchUser({}, func)}
+            <FormSearchUser />
             <BtnAccount />
             {setBtnOpenTweet()}
           </Toolbar>

@@ -100,7 +100,7 @@ export class FormDmChat extends Component {
             style={{ width: "100%" }}
           />
           <br />
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right", display: "flex" }}>
             {setBtnPicFile((file, filename) => {
               console.log("chat pic", filename);
               this.selectFile = file;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setTimeline } from "../../components/common/timelline";
-import { setValue, Istate as condition } from "../../modules/condition";
+import { setConditionValue, Icondition } from "../../modules/condition";
 import { withRouter } from "react-router";
 import { initialState, findTweet } from "../../modules/twitter";
 
@@ -9,7 +9,7 @@ class MainTimeLine extends Component {
   onClickId = id => {
     const { dispatch, history, p2p } = this.props;
     if (id !== p2p.kad.nodeId) {
-      setValue(condition.findUser, id, dispatch);
+      setConditionValue(Icondition.findUser, id, dispatch);
       history.push("/user");
     } else {
       history.push("/account");

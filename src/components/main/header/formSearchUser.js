@@ -3,20 +3,19 @@ import { IconButton, InputBase } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { Consumer } from "../index";
 
-export class FormSearchUser extends Component {
-  searchUser = id => {
-    console.log({ id });
-  };
+export default class FormSearchUser extends Component {
   state = { target: "" };
   render() {
-    const { func } = this.props;
-    if (func) {
-      this.searchUser = func.searchUser;
-    }
     return (
       <Consumer>
         {context => {
-          context = context || { func: {}, val: { p2p: {} } };
+          context = context || {
+            func: {
+              searchUser: id => {
+                console.log({ id });
+              }
+            }
+          };
           return (
             <div>
               <InputBase
@@ -28,7 +27,7 @@ export class FormSearchUser extends Component {
               />
               <IconButton
                 onClick={() => {
-                  this.searchUser(this.state.target);
+                  context.func.searchUser(this.state.target);
                   this.setState({ target: "" });
                 }}
               >
@@ -40,15 +39,4 @@ export class FormSearchUser extends Component {
       </Consumer>
     );
   }
-}
-
-export default function setFormSearchUser(
-  value = {},
-  func = {
-    searchUser: id => {
-      console.log({ id });
-    }
-  }
-) {
-  return <FormSearchUser value={value} func={func} />;
 }

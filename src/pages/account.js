@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import setAccountContext from "../components/account";
 import { Istate } from "../modules/twitter";
-import { Istate as condition } from "../modules/condition";
-import { setValue } from "../modules/condition";
+import { Icondition ,setConditionValue} from "../modules/condition";
+
 
 class Account extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Account extends Component {
   onClickId = id => {
     const { dispatch, history, p2p } = this.props;
     if (id !== p2p.kad.nodeId) {
-      setValue(condition.findUser, id, dispatch);
+      setConditionValue(Icondition.findUser, id, dispatch);
       history.push("/user");
     }
   };

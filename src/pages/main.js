@@ -2,7 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { tweet } from "../modules/twitter";
 import setMainContext from "../components/main";
-import { setValue, Istate } from "../modules/condition";
+import { setConditionValue, Icondition } from "../modules/condition";
+import Kademlia from "kad-rtc";
+import { Modal, CircularProgress } from "@material-ui/core";
 
 class Main extends React.Component {
   nodeId = "";
@@ -45,18 +47,57 @@ class Main extends React.Component {
 
   setFile = chunks => {
     const { dispatch } = this.props;
-    setValue(Istate.selectFile, chunks, dispatch);
+    setConditionValue(Icondition.selectFile, chunks, dispatch);
+  };
+
+  searchUser = userId => {
+    const { dispatch, p2p, history } = this.props;
+    searchUser(p2p.kad);
+    async function searchUser(kad = new Kademlia()) {
+      setConditionValue(Icondition.loading, true, dispatch);
+      console.log("searchUser", { userId });
+      const peer = kad.f.getPeerFromnodeId(userId);
+      if (peer) {
+        setConditionValue(Icondition.loading, false, dispatch);
+        setConditionValue(Icondition.findUser, userId, dispatch);
+        history.push("/user");
+      } else {
+        const result = await kad
+          .findNode(userId, kad.f.getCloseEstPeer(userId))
+          .catch(console.log);
+        setConditionValue(Icondition.loading, false, dispatch);
+        if (result) {
+          setConditionValue(Icondition.findUser, userId, dispatch);
+          history.push("/user");
+        }
+      }
+    }
   };
 
   render() {
-    const { p2p } = this.props;
+    const { p2p, condition } = this.props;
     console.log("main", { p2p });
     return (
       <div>
         {setMainContext(
           { kbuckets: this.state.kbuckets, nodeId: this.nodeId },
-          { excuteTweet: this.excuteTweet, reload: {}, setFile: this.setFile }
+          {
+            excuteTweet: this.excuteTweet,
+            reload: {},
+            setFile: this.setFile,
+            searchUser: this.searchUser
+          }
         )}
+        <Modal
+          open={condition.loading}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <CircularProgress />
+        </Modal>
       </div>
     );
   }
@@ -65,7 +106,8 @@ class Main extends React.Component {
 const mapStateToProps = state => {
   return {
     p2p: state.p2p,
-    twitter: state.twitter
+    twitter: state.twitter,
+    condition: state.condition
   };
 };
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { findTweet, initialState, follow } from "../modules/twitter";
 import setUserContext from "../components/user";
-import { setValue, Istate } from "../modules/condition";
+import { setConditionValue, Icondition } from "../modules/condition";
 
 class User extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class User extends Component {
 
   toDm = id => {
     const { history, dispatch } = this.props;
-    setValue(Istate.dmUserId, id, dispatch);
+    setConditionValue(Icondition.dmUserId, id, dispatch);
     if (history) history.push("/dm");
   };
 

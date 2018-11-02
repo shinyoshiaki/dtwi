@@ -1,18 +1,18 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { header } from "../components/header";
-import setTweet from "../components/timelline/tweet";
-import { setTimeline } from "../components/timelline";
-import setBtnOpenTweet from "../components/header/btnOpenTweet";
-import { FormTweet } from "../components/header/formTweet";
-import BtnPicFile from "../components/header/btnPicFile";
+import { header } from "../components/main/header";
+import setTweet from "../components/common/timelline/tweet";
+import { setTimeline } from "../components/common/timelline";
+import setBtnOpenTweet from "../components/main/header/btnOpenTweet";
+import { FormTweet } from "../components/main/header/formTweet";
+import BtnPicFile from "../components/main/header/btnPicFile";
 import FormBadge from "../components/user/badge";
 import setUserContext from "../components/user";
 import setSignin from "../components/login";
 import ChatTest from "../components/dm/test";
 import { FormDmChat } from "../components/dm/chat";
 import { setFollowList } from "../components/account/followList";
-import setFormSearchUser from "../components/header/formSearchUser";
+import setFormSearchUser from "../components/main/header/formSearchUser";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))

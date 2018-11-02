@@ -1,20 +1,22 @@
 export const initialState = {
   findUser: undefined,
   selectFile: undefined,
-  dmUserId: undefined
+  dmUserId: undefined,
+  loading: false
 };
 
-export const Istate = {
+export const Icondition = {
   findUser: "findUser",
   selectFile: "selectFile",
-  dmUserId: "dmUserId"
+  dmUserId: "dmUserId",
+  loading: "loading"
 };
 
 export const actionType = {
   SET_VALUE: "CONDITION_SET_VALUE"
 };
 
-export function setValue(key, value, dispatch) {
+export function setConditionValue(key, value, dispatch) {
   dispatch({ type: actionType.SET_VALUE, data: { key, value } });
 }
 
