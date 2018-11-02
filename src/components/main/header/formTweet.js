@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
-import { Consumer } from "../main";
+import { Consumer } from "../";
 import setBtnPicFile from "./btnPicFile";
 
 export class FormTweet extends Component {

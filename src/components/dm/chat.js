@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { TextField, Button } from "@material-ui/core";
-import setBtnPicFile, { BtnPicFile } from "../header/btnPicFile";
-const loremIpsum = require("lorem-ipsum");
-const moment = require("moment");
-const Identicon = require("identicon.js");
+import setBtnPicFile from "../main/header/btnPicFile";
 
 export class FormDmChat extends Component {
   toAccount = () => {
@@ -15,33 +12,8 @@ export class FormDmChat extends Component {
   };
 
   state = {
-    messageList: [
-      {
-        position: "right",
-        type: "text",
-        text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-        date: new Date()
-      },
-      {
-        position: "left",
-        title: "test",
-        type: "photo",
-        status: "sent",
-        view: "list",
-        data: { uri: `data:image/png;base64,${this.photo(150)}` },
-        text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
-        date: new Date(),
-        dateString: moment(new Date()).format("HH:mm")
-      }
-    ]
+    messageList: []
   };
-
-  photo(size) {
-    return new Identicon(String(Math.random()) + String(Math.random()), {
-      margin: 0,
-      size: size || 20
-    }).toString();
-  }
 
   sendComment = () => {};
   text = "";

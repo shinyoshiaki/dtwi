@@ -2,7 +2,7 @@ import React, { Component, createContext } from "react";
 import { IconButton } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import { Istate } from "../../modules/twitter";
-import { setTimeline } from "../../components/timelline";
+import { setTimeline } from "../../components/common/timelline";
 import { setFollowList } from "./followList";
 
 const Context = createContext();

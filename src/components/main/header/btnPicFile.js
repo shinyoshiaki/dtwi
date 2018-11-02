@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
-import { getSliceArrayBuffer } from "../../lib/file";
+import { getSliceArrayBuffer } from "../../../lib/file";
 
 export class BtnPicFile extends Component {
   handleFile = async e => {

@@ -1,8 +1,8 @@
 import React from "react";
-import { AppBar, Tabs, Tab, Toolbar, Button } from "@material-ui/core";
+import { AppBar, Tabs, Tab, Toolbar } from "@material-ui/core";
 import BtnAccount from "./btnAccount";
 import setBtnOpenTweet from "./btnOpenTweet";
-import BtnReloadTimeline from "../main/btnReloadTimeline";
+import BtnReloadTimeline from "../btnReloadTimeline";
 import setFormSearchUser from "./formSearchUser";
 
 class Header extends React.Component {

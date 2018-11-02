@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { setTimeline } from "../../components/timelline";
+import { setTimeline } from "../../components/common/timelline";
 import { setValue, Istate as condition } from "../../modules/condition";
 import { withRouter } from "react-router";
 import { initialState, findTweet } from "../../modules/twitter";

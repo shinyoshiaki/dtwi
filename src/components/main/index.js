@@ -1,7 +1,7 @@
 import React, { Component, createContext } from "react";
-import { header } from "../header";
+import { header } from "./header";
 import MainTimeLine from "../../containers/main/timeline";
-import { createNodeList } from "../util/nodeList";
+import { createNodeList } from "../common/util/nodeList";
 
 const Context = createContext();
 export const { Provider, Consumer } = Context;

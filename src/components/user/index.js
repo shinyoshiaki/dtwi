@@ -1,7 +1,7 @@
 import React, { Component, createContext } from "react";
 import { IconButton } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
-import { setTimeline } from "../../components/timelline";
+import { setTimeline } from "../../components/common/timelline";
 import FormBadge from "./badge";
 
 const Context = createContext();
