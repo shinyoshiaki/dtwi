@@ -3,7 +3,7 @@ import { Consumer } from ".";
 import Kademlia from "kad-rtc";
 
 const findPicture = (url, p2p) => {
-  if (!p2p.kad) return;
+  if (!p2p || !p2p.kad) return;
   console.log("findpicture", { url });
   return new Promise((resolve, reject) => {
     find(p2p.kad);
@@ -79,8 +79,8 @@ export class ImageTweet extends Component {
     return (
       <Consumer>
         {context => {
-          context = context || {};
-          this.p2p = context.p2p;
+          context = context || { func: {}, val: { p2p: {} } };
+          this.p2p = context.val.p2p;
           return (
             <div>
               {imageUrl}

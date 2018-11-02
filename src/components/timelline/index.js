@@ -9,7 +9,7 @@ export class Timeline extends Component {
     const { timeline, func, p2p } = this.props;
     console.log("timeline render", { timeline });
     return (
-      <Provider value={{ func, p2p }}>
+      <Provider value={{ func, val: { p2p } }}>
         <div style={{ width: "50%" }}>
           {timeline.map((v, i) => {
             return setTweet(v, i);

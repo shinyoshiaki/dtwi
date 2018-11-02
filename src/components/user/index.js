@@ -11,7 +11,7 @@ export class UserContext extends Component {
   render() {
     const { value, func } = this.props;
     return (
-      <Provider value={{ func, value }}>
+      <Provider value={{ func, val: value }}>
         <IconButton onClick={func.toMain} style={{ marginLeft: "auto" }}>
           <ArrowBack />
         </IconButton>

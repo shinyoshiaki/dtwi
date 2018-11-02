@@ -4,10 +4,6 @@ import { AccountCircle } from "@material-ui/icons";
 import { Consumer } from "./index";
 
 export default class FormBadge extends Component {
-  toDm = id => {};
-  follow = () => {};
-  userId = "";
-
   toAccount = () => {
     const { history } = this.props;
     console.log("this.props", this.props);
@@ -18,29 +14,28 @@ export default class FormBadge extends Component {
     return (
       <Consumer>
         {context => {
-          if (context) {
-            this.userId = context.value.id;
-            this.toDm = context.func.toDm;
-            this.follow = context.func.follow;
-          }
+          context = context || {
+            func: { toDm: () => {}, follow: () => {} },
+            val: { id: "" }
+          };
 
           return (
             <div>
               <IconButton>
                 <AccountCircle />
               </IconButton>
-              <Button>{this.userId}</Button>
+              <Button>{context.val.id}</Button>
               <br />
               <Button
                 onClick={() => {
-                  this.follow(this.userId);
+                  context.func.follow(context.val.id);
                 }}
               >
                 follow
               </Button>
               <Button
                 onClick={() => {
-                  this.toDm(this.userId);
+                  context.func.toDm(context.val.id);
                 }}
               >
                 dm

@@ -5,15 +5,13 @@ import setImageTweet from "./picture";
 import { Consumer } from ".";
 
 export class Tweet extends Component {
-  onClickId = () => {};
   render() {
     const { tweet, index } = this.props;
     return (
       <Consumer>
         {context => {
-          if (context) {
-            this.onClickId = context.func.onClickId;
-          }
+          context = context || { func: { onClickId: () => {} }, val: {} };
+
           return (
             <div
               style={{
@@ -30,7 +28,7 @@ export class Tweet extends Component {
               </IconButton>
               <Button
                 onClick={() => {
-                  this.onClickId(tweet.id);
+                  context.func.onClickId(tweet.id);
                 }}
               >
                 {tweet.id}

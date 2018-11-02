@@ -13,10 +13,11 @@ export default class BtnReloadTimeline extends Component {
     return (
       <Consumer>
         {context => {
+          context = context || { func: { reload: () => {} }, val: {} };
           return (
             <IconButton
               onClick={() => {
-                if (context) context.reload();
+                context.func.reload();
               }}
               style={{ marginLeft: "auto" }}
             >

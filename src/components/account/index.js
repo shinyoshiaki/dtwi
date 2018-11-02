@@ -26,7 +26,7 @@ export class AccountContext extends Component {
         <div style={{ display: "flex" }}>
           <div style={{ width: 500 }}>{setFollowList(value, func)}</div>
           <div style={{ flex: 1 }}>
-            {setTimeline(this.twitter[Istate.myTweets])}
+            {setTimeline(this.twitter[Istate.myTweets], value.p2p)}
           </div>
         </div>{" "}
       </div>
@@ -35,7 +35,7 @@ export class AccountContext extends Component {
 }
 
 export default function setAccountContext(
-  value = { twitter: [], follows: [] },
+  value = { twitter: [], follows: [], p2p: {} },
   func = { toMain: () => {}, onClickId: () => {} }
 ) {
   return <AccountContext value={value} func={func} />;

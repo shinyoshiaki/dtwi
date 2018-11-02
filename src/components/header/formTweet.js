@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { TextField, Button } from "@material-ui/core";
-import BtnPicFile from "./btnPicFile";
 import { Consumer } from "../main";
 import setBtnPicFile from "./btnPicFile";
 
@@ -17,6 +16,7 @@ export class FormTweet extends Component {
     return (
       <Consumer>
         {context => {
+          context = context || { func: { excuteTweet: () => {} }, val: {} };
           return (
             <div style={{ margin: 10 }}>
               <TextField
@@ -39,7 +39,7 @@ export class FormTweet extends Component {
                 <Button
                   style={{ float: "right" }}
                   onClick={() => {
-                    context.excuteTweet(this.state.target, this.file);
+                    context.func.excuteTweet(this.state.target, this.file);
                     this.setState({ target: "" });
                     closeModal();
                   }}

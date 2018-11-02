@@ -7,43 +7,33 @@ const Context = createContext();
 export const { Provider, Consumer } = Context;
 
 export class MainContext extends Component {
-  excuteTweet = () => {};
-  reload = () => {};
-  setFile = () => {};
-  kbuckets = [];
-  nodeId = "";
-
   render() {
-    const { value, func } = this.props;
-    if (value && func) {
-      this.kbuckets = value.kbuckets;
-      this.nodeId = value.nodeId;
-      this.excuteTweet = func.excuteTweet;
-      this.reload = func.reload;
-      this.setFile = func.setFile;
-    }
+    const { val, func } = this.props;
+
     console.log("main index", this.props);
     return (
-      <Provider
-        value={{
-          excuteTweet: this.excuteTweet,
-          reload: this.reload,
-          setFile: this.setFile
-        }}
-      >
-        {header({
-          titles: ["timeline", "kademlia"],
-          pages: [<MainTimeLine />, createNodeList(this.kbuckets)],
-          nodeId: this.nodeId
-        })}
+      <Provider value={{ val, func }}>
+        {header(
+          {
+            titles: ["timeline", "kademlia"],
+            pages: [<MainTimeLine />, createNodeList(val.kbuckets)],
+            nodeId: val.nodeId
+          },
+          {}
+        )}
       </Provider>
     );
   }
 }
 
 export default function setMainContext(
-  value = { kbuckets: [], nodeId: "" },
-  func = { excuteTweet: () => {}, reload: () => {}, setFile: () => {} }
+  val = { kbuckets: [], nodeId: "" },
+  func = {
+    excuteTweet: () => {},
+    reload: () => {},
+    setFile: () => {},
+    searchUser: () => {}
+  }
 ) {
-  return <MainContext value={value} func={func} />;
+  return <MainContext val={val} func={func} />;
 }

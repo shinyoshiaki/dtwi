@@ -3,6 +3,7 @@ import { AppBar, Tabs, Tab, Toolbar, Button } from "@material-ui/core";
 import BtnAccount from "./btnAccount";
 import setBtnOpenTweet from "./btnOpenTweet";
 import BtnReloadTimeline from "../main/btnReloadTimeline";
+import setFormSearchUser from "./formSearchUser";
 
 class Header extends React.Component {
   state = {
@@ -18,8 +19,8 @@ class Header extends React.Component {
   pages = [];
 
   render() {
-    const { value } = this.props;
-    if (value) {
+    const { value, func } = this.props;
+    if (value && func) {
       this.titles = value.titles;
       this.pages = value.pages;
       this.nodeId = value.nodeId;
@@ -41,6 +42,7 @@ class Header extends React.Component {
             </Tabs>
             <BtnReloadTimeline />
             <div style={{ color: "black" }}> {this.nodeId}</div>
+            {setFormSearchUser({}, func)}
             <BtnAccount />
             {setBtnOpenTweet()}
           </Toolbar>
@@ -53,6 +55,9 @@ class Header extends React.Component {
   }
 }
 
-export function header(value = { titles: [], pages: [], nodeId: "" }) {
-  return <Header value={value} />;
+export function header(
+  value = { titles: [], pages: [], nodeId: "" },
+  func = {}
+) {
+  return <Header value={value} func={func} />;
 }

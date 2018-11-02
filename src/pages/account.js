@@ -28,11 +28,11 @@ class Account extends Component {
   };
 
   render() {
-    const { twitter } = this.props;
+    const { twitter, p2p } = this.props;
     return (
       <div>
         {setAccountContext(
-          { twitter: twitter, follows: twitter[Istate.followIds] },
+          { twitter: twitter, follows: twitter[Istate.followIds], p2p },
           { toMain: this.toMain, onClickId: this.onClickId }
         )}
       </div>
