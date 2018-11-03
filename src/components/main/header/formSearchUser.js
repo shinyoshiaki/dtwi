@@ -24,7 +24,6 @@ export default class FormSearchUser extends Component {
                 onChange={e => {
                   this.setState({ target: e.target.value });
                 }}
-                style={{ width: "20%" }}
               />
               <IconButton
                 onClick={() => {

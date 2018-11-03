@@ -4,24 +4,21 @@ import {
   TableHead,
   TableRow,
   TableCell,
-  TableBody
+  TableBody,
+  Button
 } from "@material-ui/core";
 
 export default class NodeList extends Component {
+  kbuckets = [];
+  toUser = id => {};
+
   render() {
-    const { kbuckets } = this.props;
-    const arr = {};
-    console.log({ kbuckets });
-    if (kbuckets)
-      kbuckets.forEach((kbucket, i) => {
-        if (kbucket.length > 0) {
-          let line = "";
-          kbucket.forEach(node => {
-            line += node.nodeId + " , ";
-          });
-          arr[i] = line;
-        }
-      });
+    const { val, func } = this.props;
+    if (val && func) {
+      this.kbuckets = val.kbuckets;
+      this.toUser = func.toUser;
+    }
+    console.log("nodelist", this.kbuckets);
     return (
       <div style={{ margin: "20px" }}>
         <Table>
@@ -32,13 +29,27 @@ export default class NodeList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.keys(arr).map((key, i) => {
-              const kbucket = arr[key];
-              return (
+            {this.kbuckets.map((kbucket, i) => {
+              return kbucket.length > 0 ? (
                 <TableRow key={i}>
-                  <TableCell>{key}</TableCell>
-                  <TableCell>{kbucket}</TableCell>
+                  <TableCell>{i}</TableCell>
+                  <TableCell>
+                    {kbucket.map((peer, i) => {
+                      return (
+                        <Button
+                          key={i}
+                          onClick={() => {
+                            this.toUser(peer.nodeId);
+                          }}
+                        >
+                          {peer.nodeId}
+                        </Button>
+                      );
+                    })}
+                  </TableCell>
                 </TableRow>
+              ) : (
+                undefined
               );
             })}
           </TableBody>
@@ -48,7 +59,9 @@ export default class NodeList extends Component {
   }
 }
 
-export function createNodeList(kbuckets) {
-  console.log({ kbuckets });
-  return <NodeList kbuckets={kbuckets} />;
+export function createNodeList(
+  val = { kbuckets: [] },
+  func = { toUser: id => {} }
+) {
+  return <NodeList val={val} func={func} />;
 }

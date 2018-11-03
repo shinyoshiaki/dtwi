@@ -11,18 +11,32 @@ export const { Provider, Consumer } = Context;
 export class AccountContext extends Component {
   twitter = [];
   toMain = () => {};
+  p2p = { kad: { nodeId: "null" } };
 
   render() {
     const { value, func } = this.props;
     if (value && func) {
       this.twitter = value.twitter;
       this.toMain = func.toMain;
+      this.p2p = value.p2p;
     }
+    console.log("account context", this.p2p);
     return (
       <div>
         <IconButton onClick={this.toMain} style={{ marginLeft: "auto" }}>
           <ArrowBack />
         </IconButton>
+        <div
+          style={{
+            textAlign: "center",
+            border: "1px solid",
+            borderRadius: 4,
+            borderWidth: 0.5,
+            borderColor: "#d6d7da"
+          }}
+        >
+          {this.p2p.kad.nodeId}
+        </div>
         <div style={{ display: "flex" }}>
           <div style={{ width: 500 }}>{setFollowList(value, func)}</div>
           <div style={{ flex: 1 }}>
@@ -35,7 +49,7 @@ export class AccountContext extends Component {
 }
 
 export default function setAccountContext(
-  value = { twitter: [], follows: [], p2p: {} },
+  value = { twitter: [], follows: [], p2p: { kad: { nodeId: "null" } } },
   func = { toMain: () => {}, onClickId: () => {} }
 ) {
   return <AccountContext value={value} func={func} />;

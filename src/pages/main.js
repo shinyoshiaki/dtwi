@@ -6,7 +6,7 @@ import { setConditionValue, Icondition } from "../modules/condition";
 import Kademlia from "kad-rtc";
 import { Modal, CircularProgress } from "@material-ui/core";
 import setNofitication from "../components/common/nofitication";
-import { toDm } from "../domain/dm";
+import { toDm, toUser } from "../domain/dm";
 
 class Main extends React.Component {
   nodeId = "";
@@ -15,7 +15,7 @@ class Main extends React.Component {
     const { p2p, history } = this.props;
     this.state = {
       value: 0,
-      kbuckets: []
+      kbuckets: p2p.kad ? p2p.kad.kbuckets : []
     };
 
     if (!p2p.kad) {
@@ -87,8 +87,12 @@ class Main extends React.Component {
     setConditionValue(Icondition.nofiticationOpen, false, dispatch);
   };
 
-  dmlist_onClickId = id => {
+  toDm = id => {
     toDm(this.props, id);
+  };
+
+  toUser = id => {
+    toUser(this.props, id);
   };
 
   render() {
@@ -108,7 +112,8 @@ class Main extends React.Component {
             setFile: this.setFile,
             searchUser: this.searchUser,
             toAccount: this.toAccount,
-            dmlist_onClickId: this.dmlist_onClickId
+            toDm: this.toDm,
+            toUser: this.toUser
           }
         )}
         <Modal

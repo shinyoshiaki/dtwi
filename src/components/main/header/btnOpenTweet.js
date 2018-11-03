@@ -16,7 +16,7 @@ export class BtnOpenTweet extends Component {
     this.setState({ open: false });
   };
 
-  render() {    
+  render() {
     return (
       <div>
         <Button onClick={this.handleOpen}>tweet</Button>
@@ -45,7 +45,7 @@ export class BtnOpenTweet extends Component {
               </Typography>
             </div>
             <br />
-            {setFormTweet( this.handleClose)}
+            {setFormTweet(this.handleClose)}
           </div>
         </Modal>
       </div>

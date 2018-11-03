@@ -20,7 +20,7 @@ export class MainContext extends Component {
             pages: [
               <MainTimeLine />,
               setDmList(val, func),
-              createNodeList(val.kbuckets)
+              createNodeList({ kbuckets: val.kbuckets }, func)
             ],
             nodeId: val.nodeId
           },
@@ -39,7 +39,8 @@ export default function setMainContext(
     setFile: () => {},
     searchUser: () => {},
     toAccount: () => {},
-    dmlist_onClickId: id => {}
+    toDm: id => {},
+    toUser: id => {}
   }
 ) {
   return <MainContext val={val} func={func} />;

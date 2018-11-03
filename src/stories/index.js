@@ -14,6 +14,7 @@ import { FormDmChat } from "../components/dm/chat";
 import { setFollowList } from "../components/account/followList";
 import setFormSearchUser from "../components/main/header/formSearchUser";
 import VideoChatTest from "../components/common/videoChat/test";
+import setAccountContext from "../components/account";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -100,6 +101,8 @@ storiesOf("dm", module)
   .add("chat", () => <FormDmChat />)
   .add("videotest", () => <VideoChatTest />);
 
-storiesOf("account", module).add("followlist", () => {
-  return setFollowList({ follows: ["a", "b", "c"] });
-});
+storiesOf("account", module)
+  .add("followlist", () => {
+    return setFollowList({ follows: ["a", "b", "c"] });
+  })
+  .add("index", () => setAccountContext());

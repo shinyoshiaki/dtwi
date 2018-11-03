@@ -44,7 +44,6 @@ class Header extends React.Component {
                 : undefined}
             </Tabs>
             <BtnReloadTimeline />
-            <div style={{ color: "black", width: "10%" }}> {this.nodeId}</div>
             <FormSearchUser />
             <BtnAccount />
             {setBtnOpenTweet()}

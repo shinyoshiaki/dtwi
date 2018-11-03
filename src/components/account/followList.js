@@ -15,7 +15,16 @@ export class FollowList extends Component {
     }
 
     return (
-      <div style={{ width: 200, textAlign: "center" }}>
+      <div
+        style={{
+          height: "100%",
+          textAlign: "center",
+          border: "1px solid",
+          borderRadius: 4,
+          borderWidth: 0.5,
+          borderColor: "#d6d7da"
+        }}
+      >
         <div>follow list</div>
         {this.follows.map((v, i) => {
           return (

@@ -45,6 +45,7 @@ export class VideoChat extends Component {
             this.video = video;
           }}
           autoPlay={true}
+          style={{ width: "100%", height: "100%" }}
         />
       </div>
     );

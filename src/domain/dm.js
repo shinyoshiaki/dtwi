@@ -5,3 +5,9 @@ export const toDm = (props, id) => {
   setConditionValue(Icondition.dmUserId, id, dispatch);
   if (history) history.push("/dm");
 };
+
+export const toUser = (props, id) => {
+  const { history, dispatch } = props;
+  setConditionValue(Icondition.findUser, id, dispatch);
+  if (history) history.push("/user");
+};

@@ -3,13 +3,13 @@ import { Button } from "@material-ui/core";
 
 export class DmList extends Component {
   messages = {};
-  onClickId = id => {};
+  toDm = id => {};
 
   render() {
     const { val, func } = this.props;
     if (val && func) {
       this.messages = val.dmlist_messages;
-      this.onClickId = func.dmlist_onClickId;
+      this.toDm = func.toDm;
     }
 
     return (
@@ -21,7 +21,7 @@ export class DmList extends Component {
             <div key={i}>
               <Button
                 onClick={() => {
-                  this.onClickId(key);
+                  this.toDm(key);
                 }}
               >
                 {key}
@@ -38,7 +38,7 @@ export class DmList extends Component {
 export function setDmList(
   val = { dmlist_messages: {} },
   func = {
-    dmlist_onClickId: id => {}
+    toDm: id => {}
   }
 ) {
   console.log("setdmlist", { val }, { func });

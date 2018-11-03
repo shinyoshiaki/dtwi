@@ -159,8 +159,8 @@ export class FormDmChat extends Component {
           >
             <div
               style={{
-                width: "90%",
-                height: "90%",
+                width: "70%",
+                height: "70%",
                 flex: "0 1 auto",
                 margin: "auto",
                 background: "white"
