@@ -46,10 +46,6 @@ export class Tweet extends Component {
                 {tweet.pic ? setImageTweet(tweet.pic) : undefined}
               </div>
               <br />
-              <Button>name</Button>
-              <Button>name</Button>
-              <Button>name</Button>
-              <br />
             </div>
           );
         }}

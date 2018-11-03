@@ -16,8 +16,7 @@ export class FollowList extends Component {
 
     return (
       <div
-        style={{
-          height: "100%",
+        style={{          
           textAlign: "center",
           border: "1px solid",
           borderRadius: 4,

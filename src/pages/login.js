@@ -6,6 +6,7 @@ import { event } from "../modules/twitter";
 import { event as dmEvent } from "../modules/dm";
 import setSignin from "../components/login";
 import { getStream } from "../lib/video";
+import { encrypt, decrypt } from "../lib/cypher";
 
 class Login extends React.Component {
   targetAddress = "35.196.94.146";
@@ -25,25 +26,54 @@ class Login extends React.Component {
     setValue(Istate.node, node, dispatch);
     setValue(Istate.kad, node.kad, dispatch);
 
+    console.log(node.kad.cypher.pubKey);
+    let templink = document.createElement("a");
+    templink.href = window.URL.createObjectURL(
+      new Blob([node.kad.cypher.pubKey], {
+        type: "text/plain"
+      })
+    );
+    templink.download = "pubkey.txt";
+    templink.style.display = "none";
+    document.body.appendChild(templink);
+    templink.click();
+    document.body.removeChild(templink);
+
+    templink = document.createElement("a");
+    templink.href = window.URL.createObjectURL(
+      new Blob([node.kad.cypher.secKey], {
+        type: "text/plain"
+      })
+    );
+    templink.download = "seckey.txt";
+    templink.style.display = "none";
+    document.body.appendChild(templink);
+    templink.click();
+    document.body.removeChild(templink);
+
     event(node.kad, dispatch);
     dmEvent(node.kad, dispatch);
 
     this.props.history.push("/main");
   };
 
-  // async componentDidMount() {
-  //   const local = await getStream();
-  //   this.video.srcObject = local;
-  //   // this.setState({ localSrc: local });
-  // }
+  login = (pubkey, seckey) => {
+    try {
+      const word = "test";
+      const enc = encrypt(word, seckey);
+      const dec = decrypt(enc, pubkey);
+      if (word === dec) {
+        this.connectNode(pubkey, seckey);
+      } else {
+        console.log("error");
+      }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   render() {
-    return (
-      <div>
-        {setSignin(this.connectNode, this.connectNode)}
-        
-      </div>
-    );
+    return <div>{setSignin(this.login, this.connectNode)}</div>;
   }
 }
 

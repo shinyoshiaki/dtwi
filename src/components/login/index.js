@@ -49,6 +49,27 @@ const styles = theme => ({
 class SignIn extends Component {
   pubKey;
   secKey;
+
+  handlePubkey = async e => {
+    const blob = e.target.files[0];
+    if (!blob) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.pubKey = reader.result;
+    };
+    reader.readAsText(blob);
+  };
+
+  handleSeckey = async e => {
+    const blob = e.target.files[0];
+    if (!blob) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.secKey = reader.result;
+    };
+    reader.readAsText(blob);
+  };
+
   render() {
     const { classes, login, register } = this.props;
     return (
@@ -62,39 +83,60 @@ class SignIn extends Component {
             <Typography component="h1" variant="h5">
               Dtwi
             </Typography>
+
             <form className={classes.form}>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel>Public Key</InputLabel>
-                <Input
-                  autoFocus
-                  onChange={e => (this.pubKey = e.target.value)}
-                />
-              </FormControl>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel htmlFor="password">Secret Key</InputLabel>
-                <Input
-                  name="password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange={e => (this.secKey = e.target.value)}
-                />
-              </FormControl>
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={() => {
-                  login(this.pubKey, this.secKey);
+              <div
+                style={{
+                  border: "1px solid",
+                  borderRadius: 4,
+                  borderWidth: 0.5,
+                  borderColor: "#d6d7da"
                 }}
               >
-                Sign in
-              </Button>
+                <FormControl margin="normal" required fullWidth>
+                  <div style={{ textAlign: "center" }}>
+                    <input
+                      type="file"
+                      id="pubkey"
+                      style={{ display: "none" }}
+                      onChange={this.handlePubkey}
+                    />
+                    <label htmlFor="pubkey">
+                      <Button raised component="span">
+                        pubKey
+                      </Button>
+                    </label>
+                  </div>
+                </FormControl>
+                <FormControl margin="normal" required fullWidth>
+                  <div style={{ textAlign: "center" }}>
+                    <input
+                      type="file"
+                      id="seckey"
+                      style={{ display: "none" }}
+                      onChange={this.handleSeckey}
+                    />
+                    <label htmlFor="seckey">
+                      <Button raised component="span">
+                        secKey
+                      </Button>
+                    </label>
+                  </div>
+                </FormControl>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={() => {
+                    console.log("login", this.pubKey, this.secKey);
+                    login(this.pubKey, this.secKey);
+                  }}
+                >
+                  Sign in
+                </Button>
+              </div>
+
               <br />
               <br />
               <Button fullWidth variant="contained" onClick={register}>
