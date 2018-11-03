@@ -1,9 +1,10 @@
 import sha1 from "sha1";
 
-export function iTweet(id, time, msg, opt = { pic: undefined }) {
+export function iTweet(id, nickname, time, msg, opt = { pic: undefined }) {
   const tweet = {
     type: "tweet",
     id,
+    nickname,
     time,
     msg,
     hash: undefined,

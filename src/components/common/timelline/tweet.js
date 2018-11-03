@@ -26,6 +26,7 @@ export class Tweet extends Component {
               <IconButton onClick={this.toAccount}>
                 <AccountCircle />
               </IconButton>
+              {tweet.nickname}
               <Button
                 onClick={() => {
                   context.func.onClickId(tweet.id);

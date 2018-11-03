@@ -7,14 +7,16 @@ export const initialState = {
   lastTweet: undefined,
   timeline: [],
   userTweets: {},
-  followIds: []
+  followIds: [],
+  nickname: "null"
 };
 
 export const Istate = {
   myTweets: "myTweets",
   timeline: "timeline",
   lastTweet: "lastTweet",
-  followIds: "followIds"
+  followIds: "followIds",
+  nickname: "nickname"
 };
 
 export const actionType = {
@@ -78,8 +80,10 @@ export function tweet(
   console.log("tweet module", { opt });
   const pictureAddress = sha1(Math.random().toString()).toString();
   const tweet = opt.picture
-    ? iTweet(kad.nodeId, Date.now(), value, { pic: pictureAddress })
-    : iTweet(kad.nodeId, Date.now(), value);
+    ? iTweet(kad.nodeId, state.nickname, Date.now(), value, {
+        pic: pictureAddress
+      })
+    : iTweet(kad.nodeId, state.nickname, Date.now(), value);
   if (state.lastTweet) {
     kad.store(kad.nodeId, state.lastTweet.hash, tweet);
   } else {

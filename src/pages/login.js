@@ -2,11 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import { setValue, Istate } from "../modules/p2p";
 import Node from "kad-rtc/lib/node/node";
-import { event } from "../modules/twitter";
+import {
+  event,
+  tweet,
+  setValue as setTwitterValue,
+  Istate as Itwitter
+} from "../modules/twitter";
 import { event as dmEvent } from "../modules/dm";
 import setSignin from "../components/login";
 import { getStream } from "../lib/video";
 import { encrypt, decrypt } from "../lib/cypher";
+import { setConditionValue, Icondition } from "../modules/condition";
 
 class Login extends React.Component {
   targetAddress = "35.196.94.146";
@@ -54,7 +60,18 @@ class Login extends React.Component {
     event(node.kad, dispatch);
     dmEvent(node.kad, dispatch);
 
+    return node;
+  };
+
+  toMain = () => {
     this.props.history.push("/main");
+  };
+
+  register = nickname => {
+    const { dispatch } = this.props;
+    setTwitterValue(Itwitter.nickname, nickname, dispatch);
+    this.connectNode();
+    this.toMain();
   };
 
   login = (pubkey, seckey) => {
@@ -67,14 +84,21 @@ class Login extends React.Component {
       } else {
         console.log("error");
       }
+      this.toMain();
     } catch (error) {
       console.log({ error });
     }
   };
 
   render() {
-    return <div>{setSignin(this.login, this.connectNode)}</div>;
+    return <div>{setSignin(this.login, this.register)}</div>;
   }
 }
 
-export default connect()(Login);
+const mapStateToProps = state => {
+  return {
+    twitter: state.twitter
+  };
+};
+
+export default connect(mapStateToProps)(Login);

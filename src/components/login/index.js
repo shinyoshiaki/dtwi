@@ -12,6 +12,7 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { TextField } from "@material-ui/core";
 
 const styles = theme => ({
   layout: {
@@ -49,6 +50,7 @@ const styles = theme => ({
 class SignIn extends Component {
   pubKey;
   secKey;
+  nickname = "null";
 
   handlePubkey = async e => {
     const blob = e.target.files[0];
@@ -136,12 +138,35 @@ class SignIn extends Component {
                   Sign in
                 </Button>
               </div>
-
               <br />
               <br />
-              <Button fullWidth variant="contained" onClick={register}>
-                register
-              </Button>
+              <div
+                style={{
+                  textAlign: "center",
+                  border: "1px solid",
+                  borderRadius: 4,
+                  borderWidth: 0.5,
+                  borderColor: "#d6d7da"
+                }}
+              >
+                <TextField
+                  label="nick name"
+                  onChange={e => {
+                    this.nickname = e.target.value;
+                  }}
+                />
+                <br />
+                <br />
+                <Button
+                  fullWidth
+                  variant="contained"
+                  onClick={() => {
+                    register(this.nickname);
+                  }}
+                >
+                  register
+                </Button>
+              </div>
             </form>
           </Paper>
         </main>
@@ -154,7 +179,7 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default function setSignin(login = () => {}, register = () => {}) {
+export default function setSignin(login = () => {}, register = name => {}) {
   const Styled = withStyles(styles)(SignIn);
   return <Styled login={login} register={register} />;
 }
