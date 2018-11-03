@@ -4,6 +4,7 @@ import { initialState } from "../modules/condition";
 import setFormDmChat from "../components/dm/chat";
 import { sendComment } from "../modules/dm";
 import Kademlia from "kad-rtc";
+import { toMain } from "../domain/route";
 
 class DM extends Component {
   constructor(props) {
@@ -27,6 +28,10 @@ class DM extends Component {
     });
   };
 
+  toMain = () => {
+    toMain(this.props);
+  };
+
   render() {
     const { condition, dm, p2p } = this.props;
     const getPeer = (kad = new Kademlia(), id) => {
@@ -41,7 +46,7 @@ class DM extends Component {
             nodeId: condition.dmUserId,
             chat_peer: getPeer(p2p.kad, condition.dmUserId)
           },
-          { sendComment: this.sendComment }
+          { sendComment: this.sendComment, toMain: this.toMain }
         )}
       </div>
     );

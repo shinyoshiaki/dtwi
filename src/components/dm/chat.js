@@ -4,7 +4,7 @@ import { MessageList } from "react-chat-elements";
 import { TextField, Button, Modal, IconButton } from "@material-ui/core";
 import setBtnPicFile from "../main/header/btnPicFile";
 import setVideoChat from "../common/videoChat";
-import { Close } from "@material-ui/icons";
+import { Close, ArrowBack } from "@material-ui/icons";
 import WebRTC from "webrtc4me";
 
 export class FormDmChat extends Component {
@@ -21,6 +21,7 @@ export class FormDmChat extends Component {
   };
 
   sendComment = () => {};
+  toMain = () => {};
   selectFile;
   selectFilename;
   dataSource;
@@ -38,7 +39,9 @@ export class FormDmChat extends Component {
     const { value, func } = this.props;
     if (value && func) {
       this.sendComment = func.sendComment;
+      this.toMain = func.toMain;
       this.peer = value.chat_peer;
+
       const listenPeer = (peer = new WebRTC()) => {
         peer.events.data["chat.js"] = raw => {
           if (raw.label === "chat_video" && raw.data === "openVideo") {
@@ -90,93 +93,102 @@ export class FormDmChat extends Component {
         });
     }
     return (
-      <div
-        style={{ display: "flex", flexDirection: "column", minHeight: "95vh" }}
-      >
-        <MessageList
-          className="message-list"
-          lockable={true}
-          toBottomHeight={"100%"}
-          dataSource={this.dataSource}
-          onClick={object => {
-            console.log({ object });
-            if (object.type === "file") {
-              const templink = document.createElement("a");
-              templink.href = object.data.uri;
-              templink.download = object.filename;
-              templink.style.display = "none";
-              document.body.appendChild(templink);
-              templink.click();
-              document.body.removeChild(templink);
-            }
+      <div>
+        <IconButton onClick={this.toMain}>
+          <ArrowBack />
+        </IconButton>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "90vh"
           }}
-        />
-        <div style={{ width: "100%", marginTop: "auto" }}>
-          <TextField
-            label="comment"
-            multiline
-            margin="normal"
-            variant="outlined"
-            rows="3"
-            value={this.state.text}
-            onChange={e => this.setState({ text: e.target.value })}
-            style={{ width: "100%" }}
-          />
-          <br />
-          <Button onClick={this.openVideoModal}>video </Button>
-          <div style={{ float: "right", display: "flex" }}>
-            {setBtnPicFile(
-              { btnpicfile_label: "file" },
-              {
-                btnpicfile_set: (file, filename) => {
-                  console.log("chat pic", filename);
-                  this.selectFile = file;
-                  this.selectFilename = filename;
-                }
+        >
+          <MessageList
+            className="message-list"
+            lockable={true}
+            toBottomHeight={"100%"}
+            dataSource={this.dataSource}
+            onClick={object => {
+              console.log({ object });
+              if (object.type === "file") {
+                const templink = document.createElement("a");
+                templink.href = object.data.uri;
+                templink.download = object.filename;
+                templink.style.display = "none";
+                document.body.appendChild(templink);
+                templink.click();
+                document.body.removeChild(templink);
               }
-            )}
-            <Button
-              onClick={() => {
-                this.sendComment({
-                  text: this.state.text,
-                  file: this.selectFile,
-                  filename: this.selectFilename
-                });
-                this.setState({ text: "" });
-              }}
-            >
-              comment
-            </Button>
-          </div>
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={this.state.videoModal}
-            onClose={() => {
-              this.setState({ videoModal: false });
             }}
-            style={{ display: "flex" }}
-          >
-            <div
-              style={{
-                width: "70%",
-                height: "70%",
-                flex: "0 1 auto",
-                margin: "auto",
-                background: "white"
-              }}
-            >
-              <IconButton
+          />
+          <div style={{ width: "100%", marginTop: "auto" }}>
+            <TextField
+              label="comment"
+              multiline
+              margin="normal"
+              variant="outlined"
+              rows="3"
+              value={this.state.text}
+              onChange={e => this.setState({ text: e.target.value })}
+              style={{ width: "100%" }}
+            />
+            <br />
+            <Button onClick={this.openVideoModal}>video </Button>
+            <div style={{ float: "right", display: "flex" }}>
+              {setBtnPicFile(
+                { btnpicfile_label: "file" },
+                {
+                  btnpicfile_set: (file, filename) => {
+                    console.log("chat pic", filename);
+                    this.selectFile = file;
+                    this.selectFilename = filename;
+                  }
+                }
+              )}
+              <Button
                 onClick={() => {
-                  this.setState({ videoModal: false });
+                  this.sendComment({
+                    text: this.state.text,
+                    file: this.selectFile,
+                    filename: this.selectFilename
+                  });
+                  this.setState({ text: "" });
                 }}
-                style={{ float: "right" }}
               >
-                <Close />
-              </IconButton>
-              {setVideoChat({ videochat_peer: this.peer }, {})}
+                comment
+              </Button>
             </div>
-          </Modal>
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={this.state.videoModal}
+              onClose={() => {
+                this.setState({ videoModal: false });
+              }}
+              style={{ display: "flex" }}
+            >
+              <div
+                style={{
+                  width: "70%",
+                  height: "70%",
+                  flex: "0 1 auto",
+                  margin: "auto",
+                  background: "white"
+                }}
+              >
+                <IconButton
+                  onClick={() => {
+                    this.setState({ videoModal: false });
+                  }}
+                  style={{ float: "right" }}
+                >
+                  <Close />
+                </IconButton>
+                {setVideoChat({ videochat_peer: this.peer }, {})}
+              </div>
+            </Modal>
+          </div>
         </div>
       </div>
     );
@@ -185,7 +197,7 @@ export class FormDmChat extends Component {
 
 export default function setFormDmChat(
   value = { messages: {}, nodeId: "", chat_peer: {} },
-  func = { sendComment: () => {} }
+  func = { sendComment: () => {}, toMain: () => {} }
 ) {
   return <FormDmChat value={value} func={func} />;
 }

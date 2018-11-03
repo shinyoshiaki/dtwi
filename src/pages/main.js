@@ -6,7 +6,7 @@ import { setConditionValue, Icondition } from "../modules/condition";
 import Kademlia from "kad-rtc";
 import { Modal, CircularProgress } from "@material-ui/core";
 import setNofitication from "../components/common/nofitication";
-import { toDm, toUser } from "../domain/dm";
+import { toDm, toUser } from "../domain/route";
 
 class Main extends React.Component {
   nodeId = "";
