@@ -40,19 +40,19 @@ export class AccountContext extends Component {
               <br />
               {this.p2p.kad.nodeId}
               <br />
-              <br />
-              secKey
-              <br />
-              {this.p2p.kad.cypher.secKey}
-              <br />
-              <br />
-              pubKey
-              <br />
-              {this.p2p.kad.cypher.pubKey}
             </div>
             {setFollowList(value, func)}
           </div>
-          <div style={{ flex: 1 }}>
+          <div
+            style={{
+              flex: 1,
+              border: "1px solid",
+              borderRadius: 4,
+              borderWidth: 0.5,
+              borderColor: "#d6d7da"
+            }}
+          >
+            <div>my post</div>
             {setTimeline(this.twitter[Istate.myTweets], value.p2p)}
           </div>
         </div>{" "}

@@ -13,23 +13,41 @@ export class DmList extends Component {
     }
 
     return (
-      <div style={{ width: 200 }}>
-        <div>dm list</div>
-        {Object.keys(this.messages).map((key, i) => {
-          const message = this.messages[key];
-          return (
-            <div key={i}>
-              <Button
-                onClick={() => {
-                  this.toDm(key);
-                }}
-              >
-                {key}
-              </Button>
-              {message[message.length - 1].text}
-            </div>
-          );
-        })}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <div
+          style={{
+            width: "50%",
+            border: "1px solid",
+            borderRadius: 4,
+            borderWidth: 0.5,
+            borderColor: "#d6d7da"
+          }}
+        >
+          <div>dm list</div>
+          {Object.keys(this.messages).map((key, i) => {
+            const message = this.messages[key];
+            return (
+              <div key={i}>
+                <Button
+                  onClick={() => {
+                    this.toDm(key);
+                  }}
+                >
+                  {key}
+                </Button>
+                <br />
+                {message[message.length - 1].text}
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
