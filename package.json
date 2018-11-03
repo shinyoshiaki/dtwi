@@ -24,7 +24,8 @@
     "redux-thunk": "^2.3.0",
     "sha1": "^1.1.1",
     "socket.io-client": "^2.1.1",
-    "to-array-buffer": "^2.1.0"
+    "to-array-buffer": "^2.1.0",
+    "webrtc4me": "git+https://git@github.com/shinyoshiaki/webrtc4me.git#stream"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

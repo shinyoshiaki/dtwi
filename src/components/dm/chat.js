@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Modal, IconButton } from "@material-ui/core";
 import setBtnPicFile from "../main/header/btnPicFile";
+import setVideoChat from "../common/videoChat";
+import { Close } from "@material-ui/icons";
+import WebRTC from "webrtc4me";
 
 export class FormDmChat extends Component {
-  state = { text: "" };
+  state = { text: "", videoModal: false };
 
   toAccount = () => {
     const { history } = this.props;
@@ -21,11 +24,30 @@ export class FormDmChat extends Component {
   selectFile;
   selectFilename;
   dataSource;
+  peer = {};
+
+  openVideoModal = () => {
+    this.setState({ videoModal: true });
+    const send = (peer = new WebRTC()) => {
+      peer.send("openVideo", "chat_video");
+    };
+    send(this.peer);
+  };
 
   render() {
     const { value, func } = this.props;
     if (value && func) {
       this.sendComment = func.sendComment;
+      this.peer = value.chat_peer;
+      const listenPeer = (peer = new WebRTC()) => {
+        peer.events.data["chat.js"] = raw => {
+          if (raw.label === "chat_video" && raw.data === "openVideo") {
+            this.setState({ videoModal: true });
+          }
+        };
+      };
+      listenPeer(this.peer);
+
       const messageArr = value.messages[value.nodeId];
       if (messageArr)
         this.dataSource = messageArr.map(message => {
@@ -79,7 +101,6 @@ export class FormDmChat extends Component {
           onClick={object => {
             console.log({ object });
             if (object.type === "file") {
-              //window.open(object.data.uri);
               const templink = document.createElement("a");
               templink.href = object.data.uri;
               templink.download = object.filename;
@@ -102,6 +123,7 @@ export class FormDmChat extends Component {
             style={{ width: "100%" }}
           />
           <br />
+          <Button onClick={this.openVideoModal}>video </Button>
           <div style={{ float: "right", display: "flex" }}>
             {setBtnPicFile(
               { btnpicfile_label: "file" },
@@ -126,6 +148,35 @@ export class FormDmChat extends Component {
               comment
             </Button>
           </div>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.videoModal}
+            onClose={() => {
+              this.setState({ videoModal: false });
+            }}
+            style={{ display: "flex" }}
+          >
+            <div
+              style={{
+                width: "90%",
+                height: "90%",
+                flex: "0 1 auto",
+                margin: "auto",
+                background: "white"
+              }}
+            >
+              <IconButton
+                onClick={() => {
+                  this.setState({ videoModal: false });
+                }}
+                style={{ float: "right" }}
+              >
+                <Close />
+              </IconButton>
+              {setVideoChat({ videochat_peer: this.peer }, {})}
+            </div>
+          </Modal>
         </div>
       </div>
     );
@@ -133,7 +184,7 @@ export class FormDmChat extends Component {
 }
 
 export default function setFormDmChat(
-  value = { messages: {}, nodeId: "" },
+  value = { messages: {}, nodeId: "", chat_peer: {} },
   func = { sendComment: () => {} }
 ) {
   return <FormDmChat value={value} func={func} />;

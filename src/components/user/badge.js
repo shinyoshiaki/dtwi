@@ -20,26 +20,35 @@ export default class FormBadge extends Component {
           };
 
           return (
-            <div>
+            <div
+              style={{
+                border: "1px solid",
+                borderRadius: 4,
+                borderWidth: 0.5,
+                borderColor: "#d6d7da"
+              }}
+            >
               <IconButton>
                 <AccountCircle />
               </IconButton>
               <Button>{context.val.id}</Button>
               <br />
-              <Button
-                onClick={() => {
-                  context.func.follow(context.val.id);
-                }}
-              >
-                follow
-              </Button>
-              <Button
-                onClick={() => {
-                  context.func.toDm(context.val.id);
-                }}
-              >
-                dm
-              </Button>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                  onClick={() => {
+                    context.func.follow(context.val.id);
+                  }}
+                >
+                  follow
+                </Button>
+                <Button
+                  onClick={() => {
+                    context.func.toDm(context.val.id);
+                  }}
+                >
+                  dm
+                </Button>
+              </div>
             </div>
           );
         }}

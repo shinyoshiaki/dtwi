@@ -5,10 +5,12 @@ import Node from "kad-rtc/lib/node/node";
 import { event } from "../modules/twitter";
 import { event as dmEvent } from "../modules/dm";
 import setSignin from "../components/login";
+import { getStream } from "../lib/video";
 
 class Login extends React.Component {
   targetAddress = "35.196.94.146";
   targetPort = 20000;
+  state = { videoSrc: undefined, localSrc: undefined };
 
   connectNode = (pubkey, seckey) => {
     const { dispatch } = this.props;
@@ -29,8 +31,19 @@ class Login extends React.Component {
     this.props.history.push("/main");
   };
 
+  // async componentDidMount() {
+  //   const local = await getStream();
+  //   this.video.srcObject = local;
+  //   // this.setState({ localSrc: local });
+  // }
+
   render() {
-    return <div>{setSignin(this.connectNode, this.connectNode)}</div>;
+    return (
+      <div>
+        {setSignin(this.connectNode, this.connectNode)}
+        
+      </div>
+    );
   }
 }
 

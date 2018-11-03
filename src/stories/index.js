@@ -13,6 +13,7 @@ import ChatTest from "../components/dm/test";
 import { FormDmChat } from "../components/dm/chat";
 import { setFollowList } from "../components/account/followList";
 import setFormSearchUser from "../components/main/header/formSearchUser";
+import VideoChatTest from "../components/common/videoChat/test";
 
 storiesOf("Header", module)
   .add("index", () => header([1, 2, 3], [1, 2, 3]))
@@ -96,7 +97,8 @@ storiesOf("login", module).add("index", () => {
 
 storiesOf("dm", module)
   .add("chattest", () => <ChatTest />)
-  .add("chat", () => <FormDmChat />);
+  .add("chat", () => <FormDmChat />)
+  .add("videotest", () => <VideoChatTest />);
 
 storiesOf("account", module).add("followlist", () => {
   return setFollowList({ follows: ["a", "b", "c"] });

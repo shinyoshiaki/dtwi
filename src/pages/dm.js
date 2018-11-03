@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { initialState } from "../modules/condition";
 import setFormDmChat from "../components/dm/chat";
 import { sendComment } from "../modules/dm";
+import Kademlia from "kad-rtc";
 
 class DM extends Component {
   constructor(props) {
@@ -27,12 +28,19 @@ class DM extends Component {
   };
 
   render() {
-    const { condition, dm } = this.props;
+    const { condition, dm, p2p } = this.props;
+    const getPeer = (kad = new Kademlia(), id) => {
+      return kad.f.getPeerFromnodeId(id);
+    };
     return (
       <div>
         {this.renderId(condition)}
         {setFormDmChat(
-          { messages: dm.messages, nodeId: condition.dmUserId },
+          {
+            messages: dm.messages,
+            nodeId: condition.dmUserId,
+            chat_peer: getPeer(p2p.kad, condition.dmUserId)
+          },
           { sendComment: this.sendComment }
         )}
       </div>
