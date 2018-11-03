@@ -3,17 +3,23 @@ import { Button } from "@material-ui/core";
 import { getSliceArrayBuffer } from "../../../lib/file";
 
 export class BtnPicFile extends Component {
+  label = "";
+  set = () => {};
   handleFile = async e => {
-    const { set } = this.props;
-
     const blob = e.target.files[0];
     if (!blob) return;
     const result = await getSliceArrayBuffer(blob).catch(console.log);
     if (!result) return;
     console.log("btn pic file", { result });
-    if (set) set(result, blob.name);
+    this.set(result, blob.name);
   };
+
   render() {
+    const { val, func } = this.props;
+    if (val && func) {
+      this.label = val.btnpicfile_label;
+      this.set = func.btnpicfile_set;
+    }
     return (
       <div>
         <input
@@ -24,7 +30,7 @@ export class BtnPicFile extends Component {
         />
         <label htmlFor="raised-button-file">
           <Button raised component="span">
-            picture
+            {this.label}
           </Button>
         </label>
       </div>
@@ -32,6 +38,9 @@ export class BtnPicFile extends Component {
   }
 }
 
-export default function setBtnPicFile(set = () => {}) {
-  return <BtnPicFile set={set} />;
+export default function setBtnPicFile(
+  val = { btnpicfile_label: "picture" },
+  func = { btnpicfile_set: () => {} }
+) {
+  return <BtnPicFile val={val} func={func} />;
 }

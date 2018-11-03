@@ -34,7 +34,10 @@ export class FormTweet extends Component {
               <br />
               <div style={{ bottom: 0 }}>
                 <div style={{ float: "left" }}>
-                  {setBtnPicFile(this.handlePicFile)}
+                  {setBtnPicFile(
+                    { btnpicfile_label: "picture" },
+                    { btnpicfile_set: this.handlePicFile }
+                  )}
                 </div>
                 <Button
                   style={{ float: "right" }}

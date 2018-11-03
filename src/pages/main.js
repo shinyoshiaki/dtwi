@@ -6,6 +6,7 @@ import { setConditionValue, Icondition } from "../modules/condition";
 import Kademlia from "kad-rtc";
 import { Modal, CircularProgress } from "@material-ui/core";
 import setNofitication from "../components/common/nofitication";
+import { toDm } from "../domain/dm";
 
 class Main extends React.Component {
   nodeId = "";
@@ -86,19 +87,28 @@ class Main extends React.Component {
     setConditionValue(Icondition.nofiticationOpen, false, dispatch);
   };
 
+  dmlist_onClickId = id => {
+    toDm(this.props, id);
+  };
+
   render() {
-    const { p2p, condition } = this.props;
+    const { p2p, condition, dm } = this.props;
     console.log("main", { p2p });
     return (
       <div>
         {setMainContext(
-          { kbuckets: this.state.kbuckets, nodeId: this.nodeId },
+          {
+            kbuckets: this.state.kbuckets,
+            nodeId: this.nodeId,
+            dmlist_messages: dm.messages
+          },
           {
             excuteTweet: this.excuteTweet,
             reload: {},
             setFile: this.setFile,
             searchUser: this.searchUser,
-            toAccount: this.toAccount
+            toAccount: this.toAccount,
+            dmlist_onClickId: this.dmlist_onClickId
           }
         )}
         <Modal
@@ -127,7 +137,8 @@ const mapStateToProps = state => {
   return {
     p2p: state.p2p,
     twitter: state.twitter,
-    condition: state.condition
+    condition: state.condition,
+    dm: state.dm
   };
 };
 

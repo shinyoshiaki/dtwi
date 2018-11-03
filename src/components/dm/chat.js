@@ -5,6 +5,8 @@ import { TextField, Button } from "@material-ui/core";
 import setBtnPicFile from "../main/header/btnPicFile";
 
 export class FormDmChat extends Component {
+  state = { text: "" };
+
   toAccount = () => {
     const { history } = this.props;
     console.log("this.props", this.props);
@@ -16,7 +18,6 @@ export class FormDmChat extends Component {
   };
 
   sendComment = () => {};
-  text = "";
   selectFile;
   selectFilename;
   dataSource;
@@ -96,23 +97,30 @@ export class FormDmChat extends Component {
             margin="normal"
             variant="outlined"
             rows="3"
-            onChange={e => (this.text = e.target.value)}
+            value={this.state.text}
+            onChange={e => this.setState({ text: e.target.value })}
             style={{ width: "100%" }}
           />
           <br />
           <div style={{ float: "right", display: "flex" }}>
-            {setBtnPicFile((file, filename) => {
-              console.log("chat pic", filename);
-              this.selectFile = file;
-              this.selectFilename = filename;
-            })}
+            {setBtnPicFile(
+              { btnpicfile_label: "file" },
+              {
+                btnpicfile_set: (file, filename) => {
+                  console.log("chat pic", filename);
+                  this.selectFile = file;
+                  this.selectFilename = filename;
+                }
+              }
+            )}
             <Button
               onClick={() => {
                 this.sendComment({
-                  text: this.text,
+                  text: this.state.text,
                   file: this.selectFile,
                   filename: this.selectFilename
                 });
+                this.setState({ text: "" });
               }}
             >
               comment

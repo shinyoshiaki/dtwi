@@ -45,13 +45,13 @@ class Header extends React.Component {
             </Tabs>
             {"　"}
             <BtnReloadTimeline />
-            {"　"}
+            {"　　"}
             <div style={{ color: "black" }}> {this.nodeId}</div>
-            {"　"}
+            {"　　"}
             <FormSearchUser />
-            {"　"}
+
             <BtnAccount />
-            {"　"}
+
             {setBtnOpenTweet()}
           </Toolbar>
         </AppBar>
