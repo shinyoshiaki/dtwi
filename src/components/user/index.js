@@ -20,6 +20,7 @@ export class UserContext extends Component {
             <FormBadge />
           </div>
           <div style={{ flex: 1 }}>
+            <div>user post</div>
             {setTimeline(value.timeline, value.p2p)}
           </div>
         </div>

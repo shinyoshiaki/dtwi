@@ -41,9 +41,12 @@ class MainTimeLine extends Component {
         {() => {
           console.log("timeline test", twitter.timeline);
         }}
-        {setTimeline(twitter.timeline, p2p, {
-          onClickId: this.onClickId
-        })}
+
+        <div style={{ width: "50%" }}>
+          {setTimeline(twitter.timeline, p2p, {
+            onClickId: this.onClickId
+          })}
+        </div>
       </div>
     );
   }
