@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import WebRTC from "webrtc4me";
 import Stream, { getLocalStream } from "webrtc4me/lib/stream";
-import { getStream } from "../../../lib/video";
 
 export class VideoChat extends Component {
   state = { videoSrc: undefined, localSrc: undefined };

@@ -30,23 +30,26 @@ export class DmList extends Component {
             borderColor: "#d6d7da"
           }}
         >
-          <div>dm list</div>
-          {Object.keys(this.messages).map((key, i) => {
-            const message = this.messages[key];
-            return (
-              <div key={i}>
-                <Button
-                  onClick={() => {
-                    this.toDm(key);
-                  }}
-                >
-                  {key}
-                </Button>
-                <br />
-                {message[message.length - 1].text}
-              </div>
-            );
-          })}
+          <div style={{ margin: "1.5%" }}>
+            <div>dm list</div>
+            {Object.keys(this.messages).map((key, i) => {
+              const message = this.messages[key];
+              console.log({ message });
+              return (
+                <div key={i}>
+                  <Button
+                    onClick={() => {
+                      this.toDm(key);
+                    }}
+                  >
+                    {key}
+                  </Button>
+                  <br />
+                  {message[message.length - 1].text}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
@@ -54,7 +57,7 @@ export class DmList extends Component {
 }
 
 export function setDmList(
-  val = { dmlist_messages: {} },
+  val = { dmlist_messages: { key: [{ text: "sample" }] } },
   func = {
     toDm: id => {}
   }

@@ -35,6 +35,14 @@ export class FormDmChat extends Component {
     send(this.peer);
   };
 
+  closeVideoModal = () => {
+    this.setState({ videoModal: false });
+    const send = (peer = new WebRTC()) => {
+      peer.send("closeVideo", "chat_video");
+    };
+    send(this.peer);
+  };
+
   render() {
     const { value, func } = this.props;
     if (value && func) {
@@ -44,8 +52,11 @@ export class FormDmChat extends Component {
 
       const listenPeer = (peer = new WebRTC()) => {
         peer.events.data["chat.js"] = raw => {
-          if (raw.label === "chat_video" && raw.data === "openVideo") {
-            this.setState({ videoModal: true });
+          if (raw.label === "chat_video") {
+            if (raw.data === "openVideo") this.setState({ videoModal: true });
+            else if (raw.data === "closeVideo") {
+              this.setState({ videoModal: false });
+            }
           }
         };
       };
@@ -164,7 +175,8 @@ export class FormDmChat extends Component {
               aria-describedby="simple-modal-description"
               open={this.state.videoModal}
               onClose={() => {
-                this.setState({ videoModal: false });
+                // this.setState({ videoModal: false });
+                this.closeVideoModal();
               }}
               style={{ display: "flex" }}
             >
@@ -179,7 +191,8 @@ export class FormDmChat extends Component {
               >
                 <IconButton
                   onClick={() => {
-                    this.setState({ videoModal: false });
+                    // this.setState({ videoModal: false });
+                    this.closeVideoModal();
                   }}
                   style={{ float: "right" }}
                 >
